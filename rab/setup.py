@@ -21,6 +21,7 @@ setup(name='rab',
           # -*- Extra requirements: -*-
       ],
       entry_points="""
-      # -*- Entry points: -*-
+           [paste.paster_create_template]
+           rab = rab.rab.FrameworkTemplate
       """,
       )
