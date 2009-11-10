@@ -1,9 +1,0 @@
-setup.cfg
-setup.py
-rab/__init__.py
-rab.egg-info/PKG-INFO
-rab.egg-info/SOURCES.txt
-rab.egg-info/dependency_links.txt
-rab.egg-info/entry_points.txt
-rab.egg-info/not-zip-safe
-rab.egg-info/top_level.txt
