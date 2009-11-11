@@ -21,14 +21,17 @@ dependency "merb-auth-slice-password", merb_gems_version
 dependency "merb-param-protection", merb_gems_version
 dependency "merb-exceptions", merb_gems_version
 
-dependency "data_objects", do_gems_version
-dependency "do_sqlite3", do_gems_version # If using another database, replace this
-dependency "dm-core", dm_gems_version         
-dependency "dm-aggregates", dm_gems_version   
-dependency "dm-migrations", dm_gems_version   
-dependency "dm-timestamps", dm_gems_version   
-dependency "dm-types", dm_gems_version        
-dependency "dm-validations", dm_gems_version  
-dependency "dm-serializer", dm_gems_version   
+# dependency "data_objects", do_gems_version
+# dependency "do_sqlite3", do_gems_version # If using another database, replace this
+# dependency "dm-core", dm_gems_version         
+# dependency "dm-aggregates", dm_gems_version   
+# dependency "dm-migrations", dm_gems_version   
+# dependency "dm-timestamps", dm_gems_version   
+# dependency "dm-types", dm_gems_version        
+# dependency "dm-validations", dm_gems_version  
+# dependency "dm-serializer", dm_gems_version   
+# 
+# dependency "merb_datamapper", merb_gems_version
 
-dependency "merb_datamapper", merb_gems_version
+dependency "mongo_mapper"
+dependency "merb_mongomapper"

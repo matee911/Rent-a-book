@@ -1,3 +1,4 @@
+require 'auth'
 # This is a default user class used to activate merb-auth.  Feel free to change from a User to 
 # Some other class, or to remove it altogether.  If removed, merb-auth may not work by default.
 #
@@ -9,9 +10,23 @@
 # 
 # You will need to setup your database and create a user.
 class User
-  include DataMapper::Resource
+  # include DataMapper::Resource
+  # 
+  # property :id,     Serial
+  # property :login,  String
   
-  property :id,     Serial
-  property :login,  String
+  class << self
+    def authenticate(login, password)
+      # utworzyc usera z loginem
+      # wolac na nim auth z ldapa
+      # jesli nie zautentykowany to wywalic ??
+      # na razie tak
+      Auth::LDAP.authenticate(login, password)
+    end
+  end
+  
+  # def authenticated?(password)
+  #   Auth::LDAP.authenticate(login, password)
+  # end
   
 end

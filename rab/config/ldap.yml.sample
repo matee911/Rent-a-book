@@ -1,0 +1,8 @@
+:connection:
+  :host: localhost
+:user_base: ou=users,dc=company,dc=pl
+:login_attr: uid
+:search_attributes:
+  - cn
+  - mail
+  - sn
