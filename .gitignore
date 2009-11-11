@@ -1,2 +1,7 @@
 nbproject
 ldap.yaml
+rab/config/ldap.yml
+rab/log/merb.4000.pid
+db/mongod.lock
+db/rab_development.0
+db/rab_development.ns

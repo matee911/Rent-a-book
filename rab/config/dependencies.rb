@@ -35,3 +35,4 @@ dependency "merb-exceptions", merb_gems_version
 
 dependency "mongo_mapper"
 dependency "merb_mongomapper"
+#dependency "ruby-net-ldap" # zakomentowane bo aarek nie wie :P

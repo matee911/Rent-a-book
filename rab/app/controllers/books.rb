@@ -7,7 +7,7 @@ class Books < Application
   end
 
   def show(id)
-    @book = Book.get(id)
+    @book = Book.find(id)
     raise NotFound unless @book
     display @book
   end
@@ -20,7 +20,7 @@ class Books < Application
 
   def edit(id)
     only_provides :html
-    @book = Book.get(id)
+    @book = Book.find(id)
     raise NotFound unless @book
     display @book
   end
@@ -36,7 +36,7 @@ class Books < Application
   end
 
   def update(id, book)
-    @book = Book.get(id)
+    @book = Book.find(id)
     raise NotFound unless @book
     if @book.update(book)
        redirect resource(@book)
@@ -46,7 +46,7 @@ class Books < Application
   end
 
   def destroy(id)
-    @book = Book.get(id)
+    @book = Book.find(id)
     raise NotFound unless @book
     if @book.destroy
       redirect resource(:books)
