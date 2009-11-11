@@ -1,4 +1,27 @@
-<h1>Books controller, new action</h1>
 
-<p>Edit this file in <tt>app/views/books/new.html.erb</tt></p>
-<p>For more information and examples of CRUD views read <a href="http://wiki.merbivore.com/howto/crud_view_example_with_merb_using_erb"> this wiki page</a>
+<h1>Nowa książka</h1>
+
+<%= form_for(@book, :action => resource(@book)) do %>
+  <p>
+    <%= text_field :title, :label => "Title" %>
+  </p>
+  <p>
+    <%= text_field :description, :label => "Description" %>
+  </p>
+  <p>
+    <%= text_field :status, :label => "Status" %>
+  </p>
+  <p>
+    <%= text_field :cover_url, :label => "Cover URL" %>
+  </p>
+  <p>
+    <%= text_field :shop_url, :label => "Shop URL" %>
+  </p>
+  <p>
+    <%= text_field :isbn, :label => "ISBN" %>
+  </p>
+  <%= submit "Dodaj" %>
+<% end =%>
+
+<%= link_to 'Back', resource(:books) %>
+
