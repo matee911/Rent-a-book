@@ -1,5 +1,5 @@
 
-<h1><%= @book.title %></h1
+<h1><%= @book.title %></h1>
 
 <%= form_for(@book, :action => resource(@book)) do %>
   <p>
@@ -17,7 +17,10 @@
   <p>
     <%= text_field :shop_url, :label => "Shop URL" %>
   </p>
+  <p>
+    <%= text_field :isbn, :label => "ISBN" %>
+  </p>
   <%= submit "Update" %>
 <% end =%>
 
-  <%= link_to 'Show', resource(@book) %> | <%= link_to 'Back', resource(:books) %>
+<%= link_to 'Wróć', url(:controller => 'books', :action => 'show', :id => @book.id) %> | <%= link_to 'Wszystkie książki', resource(:books) %>
