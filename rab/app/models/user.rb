@@ -35,6 +35,10 @@ class User
       nil
     end
 
+    def users_for_select
+      User.all(:fields => %w(uid full_name), :order => 'uid').map { |u| [u.uid, u.full_name] }.insert(0, ["", "-----"])
+    end
+
   end
   
   # def authenticated?(password)

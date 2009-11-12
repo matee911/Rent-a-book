@@ -1,14 +1,19 @@
 
-<%= form_for(@book, :action => resource(@book)) do %>
+<%= form_for(@book, :action => url(:controller => "books", :action => 'update', :slug => @book.slug)) do %>
   <p>
-    <%= text_field :title, :label => "Title" %>
+    <%= text_field :title, :label => "Tytuł" %>
   </p>
   <p>
-    <%= text_field :description, :label => "Description" %>
+    <%= text_field :description, :label => "Opis" %>
   </p>
   <p>
-		<%= select :status, :collection => Book.statuses_for_select %>
+    <%= select :status, :collection => Book.statuses_for_select, :label => 'Status' %>
   </p>
+
+  <p>
+    <%= select :owner_uid, :collection => User.users_for_select, :label => 'Właściciel' %>
+  </p>
+
   <p>
     <%= text_field :cover_url, :label => "Cover URL" %>
   </p>

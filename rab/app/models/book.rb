@@ -79,7 +79,6 @@ class Book
         self.slug = "#{self.isbn.gsub(/[^\d]/,"")}-#{self.title.to_slug}"
       end
     end
-  
 
 #  http://github.com/jnunemaker/validatable
 #  validates_presence_of :title, :status

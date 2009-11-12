@@ -1,6 +1,6 @@
 
 <%= link_to 'Lista', resource(:books) %> |
-<%= link_to 'Edytuj', url(:controller => 'books', :action => 'edit', :id => @book.id) %>
+<%= link_to 'Edytuj', url(:controller => 'books', :action => 'edit', :id => @book.slug) %>
 <!-- <%= delete_button(@book, "Usuń #{@book.title}") %> -->
 
 <hr />
