@@ -12,7 +12,7 @@ class Book
   key :cover_url, String
   key :shop_url, String
   key :isbn, String
-#  tags (python, ruby, iphone, management etc.)?
+  key :tags, Array
 
 #  validates_numericality_of :status
   
