@@ -34,9 +34,8 @@ module Auth
             :attributes => settings[:search_attributes]
             ) do |entry|
             user = OpenStruct.new
-            #<OpenStruct sn=["Pawlik"], mail=["mateusz.pawlik@redefine.pl", "mpawlik@redefine.pl"], cn=["Mateusz Pawlik"]>
             settings[:search_attributes].each do |search_attr|
-              user.send("#{search_attr.to_underscored}=", entry.send(search_attr))
+              user.send("#{search_attr.to_underscored}=", entry[search_attr])
             end
           end
         end
