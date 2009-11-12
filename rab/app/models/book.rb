@@ -8,12 +8,13 @@ class Book
 
   key :title, String
   key :description, String
-  key :status, Integer # eg. 0 - n/a, 1 - proposition, 2 - waiting, 3 - available, 4 - rented
+  key :status, Integer, :numeric => true # eg. 0 - n/a, 1 - proposition, 2 - waiting, 3 - available, 4 - rented
   key :cover_url, String
   key :shop_url, String
   key :isbn, String
   # tags (python, ruby, iphone, management etc.)?
-  
+
+  validates_numericality_of :status
   
   private
     def validate_isbn
