@@ -35,7 +35,7 @@ module Auth
             ) do |entry|
             user = OpenStruct.new
             settings[:search_attributes].each do |search_attr|
-              user.send("#{search_attr}=", entry.send(search_attr))
+              user.send("#{search_attr.to_underscored}=", entry.send(search_attr))
             end
           end
         end
