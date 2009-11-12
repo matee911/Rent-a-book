@@ -1,6 +1,8 @@
 
+<%= link_to 'Lista', resource(:books) %> |
+<%= link_to 'Wróć', url(:controller => 'books', :action => 'show', :id => @book.id) %> |
+<hr />
 <h2><%= @book.title %></h2>
 
 <%= partial 'books/edit_form', :object => @book %>
 
-<%= link_to 'Wróć', url(:controller => 'books', :action => 'show', :id => @book.id) %> | <%= link_to 'Wszystkie książki', resource(:books) %>

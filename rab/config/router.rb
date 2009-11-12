@@ -35,7 +35,7 @@ Merb::Router.prepare do
   slice(:merb_auth_slice_password, :name_prefix => nil, :path_prefix => "")
   
   authenticate do
-    match("/").to(:controller => 'index')
+    match("/").to(:controller => 'books')
   end
   
   # This is the default route for /:controller/:action/:id
