@@ -23,8 +23,6 @@ class User
       # wolac na nim auth z ldapa
       # jesli nie zautentykowany to wywalic ??
       # na razie tak
-      Auth::LDAP.authenticate(login, password)
-
       user = Auth::LDAP.get_user(login, password)
 
       unless user.nil?
@@ -33,6 +31,8 @@ class User
           user = User.create!(:uid => user.uid, :full_name => user.cn, :mails => user.mail)
           user.save
         else
+          @dbuser.full_name = user.cn
+          @dbuser.mails = user.mail
           user = @dbuser
         end
       end
