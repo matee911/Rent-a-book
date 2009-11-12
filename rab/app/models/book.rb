@@ -4,6 +4,14 @@ class Book
   include MongoMapper::Document
   include Validatable
   
+  STATUS_TYPES = {
+    :na => [0, "Not available"],
+    :proposition => [1, "Proposition"],
+    :waiting => [2, "Waiting"],
+    :available => [3, "Available"],
+    :rented => [4, "Rented"]
+  }
+  
   validate :validate_isbn
   before_save :create_slug
 
@@ -17,6 +25,21 @@ class Book
   key :tags, Array
 
 #  validates_numericality_of :status
+  
+  class << self
+    def statuses_for_select
+      STATUS_TYPES.values.sort_by {|arr| arr[1]}
+    end
+    
+    def status_id(symbol)
+      STATUS_TYPES[symbol][0]
+    end
+  end
+  
+  def status_readable
+    type_arr = STATUS_TYPES.values.select {|arr| arr[0] == self.status}[0]
+    type_arr[1] unless type_arr.nil?
+  end
   
   private
     def validate_isbn

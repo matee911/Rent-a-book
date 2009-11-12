@@ -7,7 +7,7 @@
     <%= text_field :description, :label => "Description" %>
   </p>
   <p>
-    <%= text_field :status, :label => "Status" %>
+		<%= select :status, :collection => Book.statuses_for_select %>
   </p>
   <p>
     <%= text_field :cover_url, :label => "Cover URL" %>
