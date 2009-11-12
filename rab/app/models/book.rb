@@ -5,8 +5,10 @@ class Book
   include Validatable
   
   validate :validate_isbn
+  before_save :create_slug
 
   key :title, String
+  key :slug, String
   key :description, String
   key :status, Integer, :numeric => true # eg. 0 - n/a, 1 - proposition, 2 - waiting, 3 - available, 4 - rented
   key :cover_url, String
@@ -45,6 +47,12 @@ class Book
         end
       end
       errors.add(:isbn, "wrong isbn13 chcecksum") unless (10 - checksum % 10) == check_value
+    end
+    
+    def create_slug
+      if title
+        self.slug = "#{self.isbn.gsub(/[^\d]/,"")}-#{self.title.to_slug}"
+      end
     end
   
 
