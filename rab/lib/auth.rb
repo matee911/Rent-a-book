@@ -15,8 +15,7 @@ module Auth
       def create_connection!
         @ldap = Net::LDAP.new({
           :port => 389,
-          :auth => { :method => :simple },
-          :encryption => :simple_tls
+          :auth => { :method => :simple }
         }.merge(settings[:connection]))
       end
       
@@ -35,7 +34,6 @@ module Auth
             :attributes => settings[:search_attributes]
             ) do |entry|
             user = OpenStruct.new
-            user.uid = entry.uid
             settings[:search_attributes].each do |search_attr|
               user.send("#{search_attr}=", entry.send(search_attr))
             end
