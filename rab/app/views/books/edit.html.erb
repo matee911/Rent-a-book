@@ -1,26 +1,6 @@
 
-<h1><%= @book.title %></h1>
+<h2><%= @book.title %></h2>
 
-<%= form_for(@book, :action => resource(@book)) do %>
-  <p>
-    <%= text_field :title, :label => "Title" %>
-  </p>
-  <p>
-    <%= text_field :description, :label => "Description" %>
-  </p>
-  <p>
-    <%= text_field :status, :label => "Status" %>
-  </p>
-  <p>
-    <%= text_field :cover_url, :label => "Cover URL" %>
-  </p>
-  <p>
-    <%= text_field :shop_url, :label => "Shop URL" %>
-  </p>
-  <p>
-    <%= text_field :isbn, :label => "ISBN" %>
-  </p>
-  <%= submit "Update" %>
-<% end =%>
+<%= render :partial => 'books/_edit_form.html', :locals => {:book => @book} %>
 
 <%= link_to 'Wróć', url(:controller => 'books', :action => 'show', :id => @book.id) %> | <%= link_to 'Wszystkie książki', resource(:books) %>
