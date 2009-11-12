@@ -6,8 +6,8 @@ class Books < Application
     display @books
   end
 
-  def show(id)
-    @book = Book.find(id)
+  def show(slug)
+    @book = Book.find_by_slug(slug)
     raise NotFound unless @book
     display @book
   end
@@ -18,9 +18,9 @@ class Books < Application
     display @book
   end
 
-  def edit(id)
+  def edit(slug)
     only_provides :html
-    @book = Book.find(id)
+    @book = Book.find_by_slug(slug)
     raise NotFound unless @book
     display @book
   end
@@ -35,18 +35,18 @@ class Books < Application
     end
   end
 
-  def update(id, book)
-    @book = Book.find(id)
+  def update(slug, book)
+    @book = Book.find_by_slug(slug)
     raise NotFound unless @book
-    if @book.update(book)
-       redirect resource(@book)
+    if @book.update_attributes(book)
+       redirect url(:controller => "books", :action => "show", :slug => @book.slug)
     else
       display @book, :edit
     end
   end
 
-  def destroy(id)
-    @book = Book.find(id)
+  def destroy(slug)
+    @book = Book.find_by_slug(slug)
     raise NotFound unless @book
     if @book.destroy
       redirect resource(:books)

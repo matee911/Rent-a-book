@@ -18,10 +18,12 @@ class Book
   key :title, String
   key :slug, String
   key :description, String
-  key :status, Integer, :numeric => true # eg. 0 - n/a, 1 - proposition, 2 - waiting, 3 - available, 4 - rented
+  key :isbn, String
+
+  key :owner_uid, String
   key :cover_url, String
   key :shop_url, String
-  key :isbn, String
+  key :status, Integer, :numeric => true # eg. 0 - n/a, 1 - proposition, 2 - waiting, 3 - available, 4 - rented
   key :tags, Array
 
 #  validates_numericality_of :status
@@ -77,7 +79,6 @@ class Book
         self.slug = "#{self.isbn.gsub(/[^\d]/,"")}-#{self.title.to_slug}"
       end
     end
-  
 
 #  http://github.com/jnunemaker/validatable
 #  validates_presence_of :title, :status

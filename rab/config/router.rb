@@ -35,9 +35,11 @@ Merb::Router.prepare do
   slice(:merb_auth_slice_password, :name_prefix => nil, :path_prefix => "")
   
   authenticate do
-    match("/").to(:controller => 'index')
+    match("/").to(:controller => 'books')
   end
-  
+
+  match("/books/:action/:slug", :slug => /^[a-zA-Z0-9\-]+$/).to(:controller => "books")
+
   # This is the default route for /:controller/:action/:id
   # This is fine for most cases.  If you're heavily using resource-based
   # routes, you may want to comment/remove this line to prevent

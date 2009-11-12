@@ -1,6 +1,7 @@
 
+<%= link_to 'Lista', resource(:books) %> |
+<hr />
+
 <h2>Nowa książka</h2>
 
 <%= partial 'books/edit_form', :object => @book %>
-
-<%= link_to 'Back', resource(:books) %>

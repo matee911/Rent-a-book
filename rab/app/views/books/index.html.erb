@@ -1,12 +1,10 @@
 
-<h2>Książki</h2>
-
-<%= link_to 'New', resource(:books, :new) %>
-
+<%= link_to 'Dodaj', resource(:books, :new) %>
 <hr />
+<h2>Książki</h2>
 
 <ul>
   <% @books.each do |book| %>
-  <li><%= link_to "#{book.title}", url(:controller => 'books', :action => 'show', :id => book.id) %></li> <!-- <%= link_to 'Edit', resource(book, :edit) %> <%= book.title %> -->
+  <li><%= link_to "#{book.title}", url(:controller => 'books', :action => 'show', :id => book.slug) %></li> <!-- <%= link_to 'Edit', resource(book, :edit) %> <%= book.title %> -->
   <% end %>
 </ul>
