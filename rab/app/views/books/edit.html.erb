@@ -1,6 +1,6 @@
 
 <h2><%= @book.title %></h2>
 
-<%= render :partial => 'books/_edit_form.html', :locals => {:book => @book} %>
+<%= partial 'books/edit_form', :object => @book %>
 
 <%= link_to 'Wróć', url(:controller => 'books', :action => 'show', :id => @book.id) %> | <%= link_to 'Wszystkie książki', resource(:books) %>
