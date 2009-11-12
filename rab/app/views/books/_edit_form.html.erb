@@ -1,6 +1,4 @@
 
-<h2>Nowa książka</h2>
-
 <%= form_for(@book, :action => resource(@book)) do %>
   <p>
     <%= text_field :title, :label => "Title" %>
@@ -20,8 +18,5 @@
   <p>
     <%= text_field :isbn, :label => "ISBN" %>
   </p>
-  <%= submit "Dodaj" %>
+  <%= submit "Zapisz" %>
 <% end =%>
-
-<%= link_to 'Back', resource(:books) %>
-
