@@ -12,9 +12,9 @@ class Book
   key :cover_url, String
   key :shop_url, String
   key :isbn, String
-  # tags (python, ruby, iphone, management etc.)?
+#  tags (python, ruby, iphone, management etc.)?
 
-  validates_numericality_of :status
+#  validates_numericality_of :status
   
   private
     def validate_isbn
