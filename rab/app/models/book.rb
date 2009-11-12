@@ -31,7 +31,7 @@ class Book
       check_value = isbn_arr.delete_at(-1).to_i
       checksum = 0
       isbn_arr.each_with_index { |n,i| checksum += (i+1) * n.to_i }
-      errors.add(:isbn, "wrong isbn10 checksum") unless check == (checksum % 11)
+      errors.add(:isbn, "wrong isbn10 checksum") unless check_value == (checksum % 11)
     end
     
     def validate_isbn13(isbn_arr)
