@@ -1,27 +1,6 @@
 
 <h2>Nowa książka</h2>
 
-<%= form_for(@book, :action => resource(@book)) do %>
-  <p>
-    <%= text_field :title, :label => "Title" %>
-  </p>
-  <p>
-    <%= text_field :description, :label => "Description" %>
-  </p>
-  <p>
-    <%= text_field :status, :label => "Status" %>
-  </p>
-  <p>
-    <%= text_field :cover_url, :label => "Cover URL" %>
-  </p>
-  <p>
-    <%= text_field :shop_url, :label => "Shop URL" %>
-  </p>
-  <p>
-    <%= text_field :isbn, :label => "ISBN" %>
-  </p>
-  <%= submit "Dodaj" %>
-<% end =%>
+<%= partial 'books/edit_form', :object => @book %>
 
 <%= link_to 'Back', resource(:books) %>
-
