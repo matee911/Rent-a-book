@@ -14,8 +14,8 @@ class String
   end
   
   def to_slug(spacer = "-")
-    str = self.mb_chars.downcase
-    [*str].to_a.map {|c| @@characters_trans_table[c] || c }.join.gsub(/[\W_]+/, spacer)
+    str = self.downcase
+    [*str].map {|c| @@characters_trans_table[c] || c }.join.gsub(/[\W_]+/, spacer)
   end
   
   alias :slugify :to_slug
