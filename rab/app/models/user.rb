@@ -1,4 +1,5 @@
 require 'auth'
+require 'mongo_mapper'
 # This is a default user class used to activate merb-auth.  Feel free to change from a User to 
 # Some other class, or to remove it altogether.  If removed, merb-auth may not work by default.
 #
@@ -10,10 +11,11 @@ require 'auth'
 # 
 # You will need to setup your database and create a user.
 class User
-  # include DataMapper::Resource
-  # 
-  # property :id,     Serial
-  # property :login,  String
+  include MongoMapper::Document
+
+  key :uid, String, :required => true
+  key :full_name, String, :required => true
+  key :mails, Array
   
   class << self
     def authenticate(login, password)

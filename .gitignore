@@ -5,3 +5,5 @@ rab/log/merb.4000.pid
 db/mongod.lock
 db/rab_development.0
 db/rab_development.ns
+FETCH_HEAD
+rab/log/merb.4001.pid
