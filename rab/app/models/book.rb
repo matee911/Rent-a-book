@@ -1,4 +1,6 @@
 require 'mongo_mapper'
+require 'net/http'
+require 'uri'
 
 class Book
   include MongoMapper::Document
@@ -14,6 +16,8 @@ class Book
   
   validate :validate_isbn
   before_save :create_slug
+  after_save :store_cover
+  attr_accessor :cover_url
 
   key :title, String
   key :slug, String
@@ -21,7 +25,7 @@ class Book
   key :isbn, String
 
   key :owner_uid, String
-  key :cover_url, String
+#  key :cover_url, String
   key :shop_url, String
   key :status, Integer, :numeric => true # eg. 0 - n/a, 1 - proposition, 2 - waiting, 3 - available, 4 - rented
   key :tags, Array
@@ -42,7 +46,18 @@ class Book
     type_arr = STATUS_TYPES.values.select {|arr| arr[0] == self.status}[0]
     type_arr[1] unless type_arr.nil?
   end
-  
+
+  IMAGES_PATH = "/assets/covers/"
+
+  def cover
+    ext = 'jpg'
+    IMAGES_PATH + "cover-%s.%s" % [self._id, ext]
+  end
+
+  def has_cover?
+    File.exist?(Merb.root + "/public" + self.cover)
+  end
+
   private
     def validate_isbn
       # isbn validators http://en.wikipedia.org/wiki/Isbn
@@ -75,8 +90,22 @@ class Book
     end
     
     def create_slug
-      if title
+      if self.title
         self.slug = "#{self.isbn.gsub(/[^\d]/,"")}-#{self.title.to_slug}"
+      end
+    end
+
+    def store_cover
+      unless self.cover_url.nil?
+        body = Net::HTTP::get(URI.parse(self.cover_url))
+        unless File.exist?(Merb.root + "/public" + IMAGES_PATH)
+          FileUtils.mkdir_p Merb.root + "/public" + IMAGES_PATH
+        end
+        ext = 'jpg'
+        filename = Merb.root + "/public" + IMAGES_PATH + "cover-%s.%s" % [self._id, ext]
+        file = File.new(filename, 'w+')
+        file.puts(body)
+        nil
       end
     end
 
