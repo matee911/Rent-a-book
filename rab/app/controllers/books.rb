@@ -62,6 +62,9 @@ class Books < Application
       raise InternalServerError
     end
   end
-  
+
+  def hint(isbn)
+    Book.hint_book(isbn).to_json
+  end
 
 end # Books

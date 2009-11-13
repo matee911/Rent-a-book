@@ -1,6 +1,9 @@
 require 'mongo_mapper'
 require 'net/http'
 require 'uri'
+require 'atom'
+require 'open-uri'
+require 'json'
 
 class Book
   include MongoMapper::Document
@@ -39,6 +42,24 @@ class Book
     
     def status_id(symbol)
       STATUS_TYPES[symbol][0]
+    end
+
+    def hint_book(isbn)
+      isbn = isbn.gsub(/[^\d]/, "")
+      doc = Nokogiri::XML(open('http://books.google.com/books/feeds/volumes?q=isbn:%s' % isbn))
+      doc.remove_namespaces! # yup! i'll do
+      entry = doc.xpath('/feed/entry').first
+      entry_url = entry.xpath('id').text
+
+      doc = Nokogiri::XML(open(entry_url))
+      doc.remove_namespaces! # yup! i'll do
+
+      hint = {}
+      hint['title'] = doc.xpath('/entry/title[@type="text"]').text
+      hint['description'] = doc.xpath('/entry/description').text
+      hint['cover_url'] = doc.xpath('/entry/link[@rel="http://schemas.google.com/books/2008/thumbnail"]').attribute('href').to_s
+      # doc.xpath('/entry/creator').text
+      hint
     end
   end
   

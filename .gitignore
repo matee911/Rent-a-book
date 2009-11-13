@@ -6,5 +6,5 @@ db/mongod.lock
 db/rab_development.0
 db/rab_development.ns
 FETCH_HEAD
-rab/log/merb.4001.pid
-rab/log/merb.9000.pid
+rab/log/merb.*pid
+rab/public/assets/covers/*
