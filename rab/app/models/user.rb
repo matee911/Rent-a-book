@@ -17,6 +17,8 @@ class User
   key :full_name, String, :required => true
   key :mails, Array
   
+  many :permissions
+  
   class << self
     def authenticate(login, password)
       user = Auth::LDAP.get_user(login, password)
@@ -41,8 +43,19 @@ class User
 
   end
   
-  # def authenticated?(password)
-  #   Auth::LDAP.authenticate(login, password)
-  # end
+  def add_permission!(permission_name, obj = nil)
+    p = Permission.build_permission(permission_name, obj)
+    self.permissions << p
+    self.save!
+  end
+  
+  def has_permission?(permission_name, obj = nil)
+    p = Permission.build_permission(permission_name, obj)
+    p = self.permissions.select { |perm| perm == p }[0]
+    !p.nil?
+  end
+  
+  
+
   
 end
