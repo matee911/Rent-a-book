@@ -51,8 +51,15 @@ class User
   
   def has_permission?(permission_name, obj = nil)
     p = Permission.build_permission(permission_name, obj)
-    p = self.permissions.select { |perm| perm == p }[0]
-    !p.nil?
+    permission = self.permissions.select { |perm| perm == p }[0]
+    !permission.nil?
+  end
+  
+  def remove_permission(permission_name, obj = nil)
+    p = Permission.build_permission(permission_name, obj)
+    permission = self.permissions.select { |perm| perm = p }[0]
+    self.permissions.delete(permission)
+    self.save!
   end
   
   alias_method :__old_method_missing, :method_missing
