@@ -19,7 +19,7 @@ module AccessControl
   end
   
   module InstanceMethods
-    def allow(permission, opts = {})
+    def allow_if(permission, opts = {})
       if opts[:to].nil? || opts[:to].include?(action_name.to_sym)
         unless current_user.has_permission?(permission, opts[:obj])
           raise AccessControl::AccessDenied
