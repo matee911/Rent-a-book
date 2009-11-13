@@ -38,6 +38,7 @@ Merb::Router.prepare do
     match("/").to(:controller => 'books')
   end
 
+  match("/ajax/books/hint/:isbn", :isbn => /^[\d\-]+$/).to(:controller => "books", :action => "hint")
   # match("/books/:slug", :slug => /^[a-zA-Z0-9\-]+$/).to(:controller => "books")
 
   # This is the default route for /:controller/:action/:id
