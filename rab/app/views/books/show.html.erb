@@ -6,6 +6,9 @@
 <hr />
 <h2><%= @book.title %></h2>
 
+<% if @book.has_cover? %>
+  <%= image_tag @book.cover %>
+<% end %>
 
 <ul>
   <li><label>Tytuł:</label> <%= @book.title %></li>

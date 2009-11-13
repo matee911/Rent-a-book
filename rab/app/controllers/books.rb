@@ -39,7 +39,7 @@ class Books < Application
     @book = Book.find_by_slug(slug)
     raise NotFound unless @book
     if @book.update_attributes(book)
-       redirect url(:controller => "books", :action => "show", :slug => @book.slug)
+       redirect resource(@book)
     else
       display @book, :edit
     end

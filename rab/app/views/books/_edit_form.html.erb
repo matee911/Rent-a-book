@@ -1,6 +1,6 @@
 
 <%
-	form_action = @book.new_record? ? resource(:books) : resource(@book)
+  form_action = @book.new_record? ? resource(:books) : resource(@book)
 %>
 
 <%= form_for @book, :action => form_action do %>
@@ -8,7 +8,7 @@
     <%= text_field :title, :label => "Tytuł" %>
   </p>
   <p>
-    <%= text_field :description, :label => "Opis" %>
+    <%= text_area :description, :label => "Opis" %>
   </p>
   <p>
     <%= select :status, :collection => Book.statuses_for_select, :label => 'Status' %>
