@@ -1,6 +1,6 @@
 
 <%= link_to 'Lista', resource(:books) %> |
-<%= link_to 'Wróć', url(:controller => 'books', :action => 'show', :id => @book.slug) %> |
+<%= link_to 'Wróć', resource(@book) %> |
 <hr />
 <h2><%= @book.title %></h2>
 

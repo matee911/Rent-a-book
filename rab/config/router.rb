@@ -27,7 +27,7 @@
 
 Merb.logger.info("Compiling routes...")
 Merb::Router.prepare do
-  resources :books
+  resources :books, :identify => :slug
   # RESTful routes
   # resources :posts
   
@@ -38,7 +38,7 @@ Merb::Router.prepare do
     match("/").to(:controller => 'books')
   end
 
-  match("/books/:action/:slug", :slug => /^[a-zA-Z0-9\-]+$/).to(:controller => "books")
+  # match("/books/:slug", :slug => /^[a-zA-Z0-9\-]+$/).to(:controller => "books")
 
   # This is the default route for /:controller/:action/:id
   # This is fine for most cases.  If you're heavily using resource-based

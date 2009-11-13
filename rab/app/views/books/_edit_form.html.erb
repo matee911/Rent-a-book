@@ -1,5 +1,9 @@
 
-<%= form_for(@book, :action => url(:controller => "books", :action => 'update', :slug => @book.slug)) do %>
+<%
+	form_action = @book.new_record? ? resource(:books) : resource(@book)
+%>
+
+<%= form_for @book, :action => form_action do %>
   <p>
     <%= text_field :title, :label => "Tytuł" %>
   </p>
