@@ -55,7 +55,17 @@ class User
     !p.nil?
   end
   
+  alias_method :__old_method_missing, :method_missing
   
+  def method_missing(method, *args)
+    match = method.to_s.scan(/^permission_([0-9a-z_]+)\?$/)
+    unless match[0].nil?
+      return self.has_permission?(match[0][0], args[0])
+    end
+    
+    return __old_method_missing(method, *args)
+    
+  end
 
   
 end
