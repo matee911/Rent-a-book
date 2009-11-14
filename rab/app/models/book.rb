@@ -1,7 +1,6 @@
 require 'mongo_mapper'
 require 'net/http'
 require 'uri'
-require 'atom'
 require 'open-uri'
 require 'json'
 

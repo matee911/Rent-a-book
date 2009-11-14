@@ -38,3 +38,4 @@ dependency "merb_mongomapper"
 #dependency "ruby-net-ldap" # zakomentowane bo aarek nie wie :P
 dependency "nokogiri" # 1.4.0
 #dependency "ratom"
+dependency 'quick_magick'
