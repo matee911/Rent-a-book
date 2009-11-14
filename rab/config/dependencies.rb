@@ -35,7 +35,7 @@ dependency "merb-exceptions", merb_gems_version
 
 dependency "mongo_mapper"
 dependency "merb_mongomapper"
-#dependency "ruby-net-ldap" # zakomentowane bo aarek nie wie :P
+dependency "ruby-net-ldap", :require_as => "net/ldap"
 dependency "nokogiri" # 1.4.0
 #dependency "ratom"
 dependency 'quick_magick'

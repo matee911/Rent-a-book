@@ -5,9 +5,9 @@ class Books < Application
   #   Merb.logger.info "===== action: #{controller.action_name}"
   # end
   
-  access_control(:exclude => :index) do
-    allow_if "can_edit", :to => [:edit], :obj => "Book"
-  end
+  # access_control(:exclude => :index) do
+  #   allow_if "can_edit", :to => [:edit], :obj => "Book"
+  # end
 
   def index
     @books = Book.all
@@ -64,7 +64,7 @@ class Books < Application
   end
 
   def hint(isbn)
-    Book.hint_book(isbn).to_json
+    render Book.hint_book(isbn).to_json, :format => :json
   end
 
 end # Books

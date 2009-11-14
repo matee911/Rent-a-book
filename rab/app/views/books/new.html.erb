@@ -1,3 +1,30 @@
+<% throw_content :for_head do %>
+<!-- throw this to another file -->
+  <script type="text/javascript" charset="utf-8">
+    $(function(){
+      var fetch_data_link = $("<a>").attr("href", "#").text("fetch data").click(function(){
+        var isbn = $("#book_isbn").val()
+        var fetch_data_url = "/ajax/books/hint/"+isbn
+        $.ajax({
+          type: "GET",
+          url: fetch_data_url,
+          dataType: "json",
+          success: function(book_data, textStatus){
+            console.log(typeof book_data);
+            $("#book_title").val(book_data.title);
+            $("#book_description").val(book_data.description);
+            $("#book_cover_url").val(book_data.cover_url);
+            var cover_img = $("<img>").attr("src", book_data.cover_url);
+            $("#book_cover_url").parent().append(cover_img);
+          }
+        });
+        return false;
+      });
+      console.log(fetch_data_link)
+      $("#book_isbn").parent().append(fetch_data_link);
+    })
+  </script>
+<% end %>
 
 <%= link_to 'Lista', resource(:books) %> |
 <hr />
