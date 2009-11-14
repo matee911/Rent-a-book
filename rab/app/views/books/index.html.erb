@@ -5,6 +5,11 @@
 
 <ul>
   <% @books.each do |book| %>
-  <li><%= link_to "#{book.title}", resource(book) %></li> <!-- <%= link_to 'Edit', resource(book, :edit) %> <%= book.title %> -->
+  <li>
+    <% if book.has_cover? %>
+      <%= image_tag book.cover_thumbnail %>
+    <% end %>
+    <%= link_to "#{book.title}", resource(book) %>
+  </li>
   <% end %>
 </ul>

@@ -1,8 +1,7 @@
 require 'mongo_mapper'
-require 'net/http'
-require 'uri'
 require 'open-uri'
 require 'json'
+require 'quick_magick'
 
 class Book
   include MongoMapper::Document
@@ -70,12 +69,15 @@ class Book
   IMAGES_PATH = "/assets/covers/"
 
   def cover
-    ext = 'jpg'
-    IMAGES_PATH + "cover-%s.%s" % [self._id, ext]
+    IMAGES_PATH + "cover-%s.jpg" % self._id
+  end
+
+  def cover_thumbnail
+    IMAGES_PATH + "cover-%s-t.jpg" % self._id
   end
 
   def has_cover?
-    File.exist?(Merb.root + "/public" + self.cover)
+    File.exist?(Merb.root + "/public" + self.cover_thumbnail)
   end
 
   private
@@ -117,18 +119,22 @@ class Book
 
     def store_cover
       unless self.cover_url.nil?
-        body = Net::HTTP::get(URI.parse(self.cover_url))
+        body = open(self.cover_url).read
         unless File.exist?(Merb.root + "/public" + IMAGES_PATH)
           FileUtils.mkdir_p Merb.root + "/public" + IMAGES_PATH
         end
-        ext = 'jpg'
-        filename = Merb.root + "/public" + IMAGES_PATH + "cover-%s.%s" % [self._id, ext]
-        file = File.new(filename, 'w+')
+        filename_path = Merb.root + "/public" + IMAGES_PATH + "cover-%s.jpg" % self._id
+        filename_thumbnail_path = Merb.root + "/public" + IMAGES_PATH + "cover-%s-t.jpg" % self._id
+
+        file = File.new(filename_path, 'w+')
         file.puts(body)
+        file.close
+
+        img = QuickMagick::Image.read(filename_path).first
+        img.resize "80x80>"
+        # place for sharpening
+        img.save filename_thumbnail_path
         nil
       end
     end
-
-#  http://github.com/jnunemaker/validatable
-#  validates_presence_of :title, :status
 end

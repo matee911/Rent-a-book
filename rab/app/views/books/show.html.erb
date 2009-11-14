@@ -7,11 +7,20 @@
 <h2><%= @book.title %></h2>
 
 <% if @book.has_cover? %>
-  <%= image_tag @book.cover %>
+  <%= image_tag @book.cover_thumbnail %>
 <% end %>
 
 <ul>
-  <li><label>Tytuł:</label> <%= @book.title %></li>
+  <li><label>Status:</label> <%= @book.status_readable %></li>
+  <% if @book.isbn %>
+  <li><label>ISBN:</label> <%= @book.isbn %></li>
+  <% end %>
+  <% if @book.owner_uid %>
+  <li><label>Właściciel:</label> <%= @book.owner_uid %></li>
+  <% end %>
+  <% if @book.shop_url %>
+  <li><lable>Sklep:</label> <%= @book.shop_url %></li>
+  <% end %>
   <li><label>Opis:</label> <%= @book.description %></li>
 </ul>
 
