@@ -1,7 +1,9 @@
 
-<%= link_to 'Lista', resource(:books) %> |
-<%= link_to 'Wróć', resource(@book) %> |
-<hr />
+<% throw_content :menu do %>
+  | <%= link_to 'Lista', resource(:books) %> |
+  <%= link_to 'Wróć', resource(@book) %>
+<% end %>
+  
 <h2><%= @book.title %></h2>
 
 <%= partial 'edit_form.html', :with => @book %>

@@ -1,6 +1,8 @@
 
-<%= link_to 'Dodaj', resource(:books, :new) %>
-<hr />
+<% throw_content :menu do %>
+ | <%= link_to 'Dodaj', resource(:books, :new) %>
+<% end %>
+ 
 <h2>Książki</h2>
 
 <ul>
@@ -10,6 +12,10 @@
       <%= image_tag book.cover_thumbnail %>
     <% end %>
     <%= link_to "#{book.title}", resource(book) %>
+
+    <% if book.can_rent? %>
+      Yes, U can!
+    <% end %>
   </li>
   <% end %>
 </ul>

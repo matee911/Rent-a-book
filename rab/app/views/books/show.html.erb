@@ -1,9 +1,13 @@
 
-<%= link_to 'Lista', resource(:books) %> |
-<%= link_to 'Edytuj', resource(@book, :edit) %>
-<%#= delete_button(@book, "Usuń #{@book.title}") %>
+<% throw_content :menu do %>
+  | <%= link_to 'Lista', resource(:books) %> |
+  <%= link_to 'Edytuj', resource(@book, :edit) %>
+  <%#= delete_button(@book, "Usuń #{@book.title}") %>
+  <% if @book.can_rent? %>
+    Yes, U can!
+  <% end %>
+<% end %>
 
-<hr />
 <h2><%= @book.title %></h2>
 
 <% if @book.has_cover? %>

@@ -7,7 +7,7 @@
     <%= text_field :title, :label => "Tytuł" %>
   </p>
   <p>
-    <%= text_area :description, :label => "Opis" %>
+    <%= text_area :description, :label => "Opis", :rows => 10, :cols => 80 %>
   </p>
   <p>
     <%= select :status, :collection => Book.statuses_for_select, :label => 'Status' %>

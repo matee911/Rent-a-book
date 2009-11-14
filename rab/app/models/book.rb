@@ -66,6 +66,10 @@ class Book
     type_arr[1] unless type_arr.nil?
   end
 
+  def can_rent?
+    self.status == STATUS_TYPES[:available][0]
+  end
+
   IMAGES_PATH = "/assets/covers/"
 
   def cover

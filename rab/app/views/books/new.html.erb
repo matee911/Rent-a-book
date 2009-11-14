@@ -26,8 +26,9 @@
   </script>
 <% end %>
 
-<%= link_to 'Lista', resource(:books) %> |
-<hr />
+<% throw_content :menu do %>
+  | <%= link_to 'Lista', resource(:books) %>
+<% end %>
 
 <h2>Nowa książka</h2>
 
