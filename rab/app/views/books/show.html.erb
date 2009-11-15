@@ -29,7 +29,7 @@
   <% if @book.shop_url %>
   <li><label>Sklep:</label> <%= @book.shop_url %></li>
   <% end %>
-  <li><label>Opis:</label> <%= @book.description %></li>
+  <li><label>Opis:</label> <%= RedCloth.new(@book.description).to_html %></li>
 </ul>
 
 <hr />

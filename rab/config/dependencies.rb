@@ -37,6 +37,7 @@ dependency "mongo_mapper"
 dependency "merb_mongomapper"
 dependency "ruby-net-ldap", :require_as => "net/ldap"
 dependency "nokogiri" # 1.4.0
-#dependency "ratom"
 dependency 'quick_magick'
-dependency 'bluecloth' # 2.0.5
+dependency 'RedCloth', :require_as => "redcloth"
+dependency 'quick_magick'
+dependency 'json'
