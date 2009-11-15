@@ -1,7 +1,5 @@
-require 'mongo_mapper'
+# shebang
 require 'open-uri'
-require 'json'
-require 'quick_magick'
 
 class Book
   include MongoMapper::Document
