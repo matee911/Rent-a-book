@@ -57,7 +57,7 @@ class Book
       hint['description'] = doc.xpath('/entry/description').text
       hint['cover_url'] = nil
       cover_node = doc.xpath('/entry/link[@rel="http://schemas.google.com/books/2008/thumbnail"]')
-      if cover_node.count > 0
+      if cover_node.length > 0
           hint['cover_url'] = cover_node.attribute('href').to_s
       end
       # doc.xpath('/entry/creator').text
@@ -163,7 +163,7 @@ class Book
     end
 
     def store_cover
-      unless self.cover_url.nil?
+      unless self.cover_url.nil? || self.cover_url.empty?
         body = open(self.cover_url).read
         unless File.exist?(Merb.root + "/public" + IMAGES_PATH)
           FileUtils.mkdir_p Merb.root + "/public" + IMAGES_PATH

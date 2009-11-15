@@ -3,6 +3,7 @@
 %>
 
 <%= form_for @book, :action => form_action do %>
+  <%= error_messages_for @book %>
   <p>
     <%= text_field :title, :label => "Tytuł" %>
   </p>

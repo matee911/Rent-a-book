@@ -14,8 +14,10 @@
             $("#book_title").val(book_data.title);
             $("#book_description").val(book_data.description);
             $("#book_cover_url").val(book_data.cover_url);
-            var cover_img = $("<img>").attr("src", book_data.cover_url);
-            $("#book_cover_url").parent().append(cover_img);
+            if(book_data.cover_url){
+              var cover_img = $("<img>").attr("src", book_data.cover_url);
+              $("#book_cover_url").parent().append(cover_img);
+            }
           }
         });
         return false;
