@@ -63,6 +63,21 @@ class Books < Application
     end
   end
 
+  def rent(slug)
+    @book = Book.find_by_slug(slug)
+    raise NotFound unless @book
+    @book.rent(session.user)
+    redirect resource(@book)
+  end
+
+  def give_back(slug)
+    @book = Book.find_by_slug(slug)
+    raise NotFound unless @book
+    @book.give_back(session.user)
+    redirect resource(@book)
+  end
+
+  # Ajax controller actions
   def hint(isbn)
     render Book.hint_book(isbn).to_json, :format => :json
   end

@@ -1,10 +1,14 @@
 
 <% throw_content :menu do %>
   | <%= link_to 'Lista', resource(:books) %> |
-  <%= link_to 'Edytuj', resource(@book, :edit) %>
+  <%= link_to 'Edytuj', resource(@book, :edit) %> |
   <%#= delete_button(@book, "Usuń #{@book.title}") %>
   <% if @book.can_rent? %>
-    Yes, U can!
+    <%= link_to 'Biorę!', url(:rent_book, :slug => @book.slug) %>
+  <% else %>
+    <% if @book.rented_by?(session.user) %>
+      <%= link_to 'Oddaję!', url(:give_back_book, :slug => @book.slug) %>
+    <% end %>
   <% end %>
 <% end %>
 
@@ -15,7 +19,7 @@
 <% end %>
 
 <ul>
-  <li><label>Status:</label> <%= @book.status_readable %></li>
+  <li><label>Status:</label> <%= @book.status_readable %> <% if @book.rented? %>(<%= @book.rented_by %>)<% end %></li>
   <% if @book.isbn %>
   <li><label>ISBN:</label> <%= @book.isbn %></li>
   <% end %>
@@ -23,8 +27,24 @@
   <li><label>Właściciel:</label> <%= @book.owner_uid %></li>
   <% end %>
   <% if @book.shop_url %>
-  <li><lable>Sklep:</label> <%= @book.shop_url %></li>
+  <li><label>Sklep:</label> <%= @book.shop_url %></li>
   <% end %>
   <li><label>Opis:</label> <%= @book.description %></li>
 </ul>
 
+<hr />
+
+<table>
+  <tr>
+    <td>Od</td>
+    <td>Do</td>
+    <td>Kto</td>
+  </tr>
+<% @book.history.each do |rent_history| %>
+  <tr>
+    <td><%= rent_history.from_date.to_s %></td>
+    <td><%= rent_history.to_date.to_s %></td>
+    <td><%= rent_history.uid %></td>
+  </tr>
+<% end %>
+</table>

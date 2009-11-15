@@ -84,6 +84,43 @@ class Book
     File.exist?(Merb.root + "/public" + self.cover_thumbnail)
   end
 
+  def rented?
+    self.status == STATUS_TYPES[:rented][0]
+  end
+
+  def rented_by
+    unless self.rented?
+      return nil
+    end
+    rh = RentHistory.all(:book_id => self._id, :order => 'from_date desc', :limit => 1).first
+    rh.uid
+  end
+
+  def rented_by?(user)
+    self.rented_by == user.uid
+  end
+
+  def rent(user)
+    raise Exception unless self.can_rent?
+    rh = RentHistory.new(:book_id => self._id, :uid => user.uid, :from_date => Time.now)
+    rh.save
+    self.status = STATUS_TYPES[:rented][0]
+    self.save
+  end
+
+  def give_back(user)
+    raise Exception unless self.rented?
+    rh = RentHistory.all(:book_id => self._id, :uid => user.uid, :order => 'from_date desc', :limit => 1).first
+    rh.to_date = Time.now
+    rh.save
+    self.status = STATUS_TYPES[:available][0]
+    self.save
+  end
+
+  def history
+    RentHistory.all(:book_id => self._id, :order => 'from_date desc', :limit => 10)
+  end
+
   private
     def validate_isbn
       # isbn validators http://en.wikipedia.org/wiki/Isbn

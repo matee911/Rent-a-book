@@ -38,6 +38,8 @@ Merb::Router.prepare do
     match("/").to(:controller => 'books')
   end
 
+  match("/books/:slug/rent", :slug => /^[a-zA-Z0-9\-]+$/).to(:controller => "books", :action => "rent").name(:rent_book)
+  match("/books/:slug/give_back", :slug => /^[a-zA-Z0-9\-]+$/).to(:controller => "books", :action => "give_back").name(:give_back_book)
   match("/ajax/books/hint/:isbn", :isbn => /^[\d\-]+$/).to(:controller => "books", :action => "hint")
   # match("/books/:slug", :slug => /^[a-zA-Z0-9\-]+$/).to(:controller => "books")
 

@@ -39,3 +39,4 @@ dependency "ruby-net-ldap", :require_as => "net/ldap"
 dependency "nokogiri" # 1.4.0
 #dependency "ratom"
 dependency 'quick_magick'
+dependency 'bluecloth' # 2.0.5
