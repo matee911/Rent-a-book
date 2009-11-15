@@ -10,7 +10,7 @@ class Books < Application
   # end
 
   def index
-    @books = Book.all
+    @books = Book.find(:all, :order => 'title')
     display @books
   end
 
@@ -83,3 +83,4 @@ class Books < Application
   end
 
 end # Books
+

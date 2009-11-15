@@ -55,7 +55,11 @@ class Book
       hint = {}
       hint['title'] = doc.xpath('/entry/title[@type="text"]').text
       hint['description'] = doc.xpath('/entry/description').text
-      hint['cover_url'] = doc.xpath('/entry/link[@rel="http://schemas.google.com/books/2008/thumbnail"]').attribute('href').to_s
+      hint['cover_url'] = nil
+      cover_node = doc.xpath('/entry/link[@rel="http://schemas.google.com/books/2008/thumbnail"]')
+      if cover_node.count > 0
+          hint['cover_url'] = cover_node.attribute('href').to_s
+      end
       # doc.xpath('/entry/creator').text
       hint
     end
@@ -92,7 +96,7 @@ class Book
     unless self.rented?
       return nil
     end
-    rh = RentHistory.all(:book_id => self._id, :order => 'from_date desc', :limit => 1).first
+    rh = RentHistory.find(:all, :book_id => self._id, :order => 'from_date desc', :limit => 1).first
     rh.uid
   end
 
@@ -110,7 +114,7 @@ class Book
 
   def give_back(user)
     raise Exception unless self.rented?
-    rh = RentHistory.all(:book_id => self._id, :uid => user.uid, :order => 'from_date desc', :limit => 1).first
+    rh = RentHistory.find(:all, :book_id => self._id, :uid => user.uid, :order => 'from_date desc', :limit => 1).first
     rh.to_date = Time.now
     rh.save
     self.status = STATUS_TYPES[:available][0]
@@ -118,7 +122,7 @@ class Book
   end
 
   def history
-    RentHistory.all(:book_id => self._id, :order => 'from_date desc', :limit => 10)
+    RentHistory.find(:all, :book_id => self._id, :order => 'from_date desc', :limit => 10)
   end
 
   private
