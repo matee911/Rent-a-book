@@ -4,6 +4,6 @@ class RentHistory
 
   key :book_id, String, :required => true
   key :uid, String, :required => true
-  key :from_date, DateTime, :required => true
-  key :to_date, DateTime
+  key :from_date, Time, :required => true
+  key :to_date, Time
 end
