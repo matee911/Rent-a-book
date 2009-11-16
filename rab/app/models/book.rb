@@ -96,6 +96,21 @@ class Book
       end
     end
     
+    def prepare_slug(slug, obj, attempt = 0)
+      slugified = attempt == 0 ? slug : "#{slug}-#{attempt}"
+      conditions = { :slug => slugified }
+      unless obj.new_record?
+        conditions[:id] = { "$ne" => obj.id }
+      end
+      books = self.find(:all, :conditions => conditions)
+      if books.empty?
+        return slugified
+      else
+        return prepare_slug(slug, obj, attempt + 1)
+      end
+      
+    end
+    
   end
   
   def status_readable
@@ -180,7 +195,8 @@ class Book
     
     def create_slug
       if self.title
-        self.slug = "#{self.isbn.gsub(/\ |-/, '')}-#{self.title.to_slug}"
+        default_slug = new_record? ? "#{self.isbn.gsub(/\ |-/, '')}-#{self.title.to_slug}" : self.slug
+        self.slug = Book.prepare_slug(default_slug, self)
       end
     end
 

@@ -15,7 +15,7 @@ development: &defaults
  
 test:
   <<:       *defaults
-  database: sample_test.db
+  database: rab_test
  
   # repositories:
   #   repo1:
