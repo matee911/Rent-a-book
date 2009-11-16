@@ -29,4 +29,18 @@ describe Book do
     b1.slug.should be_eql(b1_slug) # slug should stay the same
   end
 
+  it "should validate isbn10" do
+    Book.valid_isbn10?("83-7322-825-X").should be_eql true
+    Book.valid_isbn10?("83-7322-825-0").should be_eql false
+    Book.valid_isbn10?("83-7322-ABC-X").should be_eql false
+  end
+
+  it "should validate isbn13" do
+    Book.valid_isbn13?("978-0596158064").should be_eql true
+    Book.valid_isbn13?("978-0596158060").should be_eql false
+    Book.valid_isbn13?("ABC-0596158064").should be_eql false
+    Book.valid_isbn13?("978-83-246-1082-2").should be_eql true
+    Book.valid_isbn13?("978-0470227800").should be_eql true
+  end
+
 end

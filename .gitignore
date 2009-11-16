@@ -8,3 +8,6 @@ db/rab_development.ns
 FETCH_HEAD
 rab/log/merb.*pid
 rab/public/assets/covers/*
+db/rab_test.0
+db/rab_test.ns
+.DS_Store

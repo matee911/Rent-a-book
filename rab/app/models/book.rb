@@ -7,6 +7,7 @@ class Book
   
   ISBN10_RX = /^(?:\d[\ |-]?){9}[\d|X]$/
   ISBN13_RX = /^(?:\d[\ |-]?){13}$/
+  IMAGES_PATH = "/assets/covers/"
   
   STATUS_TYPES = {
     :na => [0, "Not available"],
@@ -108,7 +109,6 @@ class Book
       else
         return prepare_slug(slug, obj, attempt + 1)
       end
-      
     end
     
   end
@@ -121,8 +121,6 @@ class Book
   def can_rent?
     self.status == STATUS_TYPES[:available][0]
   end
-
-  IMAGES_PATH = "/assets/covers/"
 
   def cover
     IMAGES_PATH + "cover-%s.jpg" % self._id
@@ -209,14 +207,15 @@ class Book
         filename_path = Merb.root + "/public" + IMAGES_PATH + "cover-%s.jpg" % self._id
         filename_thumbnail_path = Merb.root + "/public" + IMAGES_PATH + "cover-%s-t.jpg" % self._id
 
-        file = File.new(filename_path, 'w+')
-        file.puts(body)
-        file.close
+        img = QuickMagick::Image.from_blob(body).first
+        img.format = 'jpg'
+        img.save(filename_path)
 
-        img = QuickMagick::Image.read(filename_path).first
+        img = QuickMagick::Image.from_blob(body).first
+        img.format = 'jpg'
         img.resize "80x80>"
         # place for sharpening
-        img.save filename_thumbnail_path
+        img.save(filename_thumbnail_path)
         nil
       end
     end
