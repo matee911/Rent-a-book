@@ -10,4 +10,4 @@ rab/log/merb.*pid
 rab/public/assets/covers/*
 db/rab_test.0
 db/rab_test.ns
-rab/public/assets/.DS_Store
+.DS_Store
