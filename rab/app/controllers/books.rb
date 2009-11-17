@@ -18,7 +18,7 @@ class Books < Application
 
     if !letter.nil? and ('A'..'Z').include? letter.upcase
       options[:title] = /^#{letter.upcase}/i
-    elsif ('0'..'9').include? letter
+    else
       options[:title] = /^[0-9]/
     end
     @books = Book.paginate(options)
