@@ -7,6 +7,7 @@ class Books < Application
   
   access_control(:exclude => :index) do
     allow_if "can_edit", :to => [:edit], :obj => "Book"
+    allow_all :to => [:show]
   end
 
   def index
