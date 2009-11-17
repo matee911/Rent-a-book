@@ -21,6 +21,8 @@ class Books < Application
     else
       options[:title] = /^[0-9]/
     end
+    @feed_paginator = {}
+    @feed_paginator[:letter] = letter unless letter.nil?
     @books = Book.paginate(options)
     display @books
   end
