@@ -1,0 +1,19 @@
+
+<%= @user.full_name %>
+
+<table>
+  <tr>
+    <td>Od</td>
+    <td>Do</td>
+    <td>Książka</td>
+  </tr>
+<% @user.history.each do |rent_history| %>
+  <tr>
+    <td><%= rent_history.from_date.to_s %></td>
+    <td><%= rent_history.to_date.to_s %></td>
+    <td>
+      <% if !rent_history.book.nil? %><%= link_to rent_history.book.title, resource(rent_history.book) %><% end %>
+    </td>
+  </tr>
+<% end %>
+</table>

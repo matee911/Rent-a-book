@@ -19,7 +19,12 @@
 <% end %>
 
 <ul>
-  <li><label>Status:</label> <%= @book.status_readable %> <% if @book.rented? %>(<%= @book.rented_by %>)<% end %></li>
+  <li>
+    <label>Status:</label> <%= @book.status_readable %>
+    <% if @book.rented? %>
+      (<%= link_to @book.rented_by, url(:show_user, :uid => @book.rented_by) %>)
+    <% end %>
+  </li>
   <% if @book.isbn %>
   <li><label>ISBN:</label> <%= @book.isbn %></li>
   <% end %>
@@ -44,7 +49,7 @@
   <tr>
     <td><%= rent_history.from_date.to_s %></td>
     <td><%= rent_history.to_date.to_s %></td>
-    <td><%= rent_history.uid %></td>
+    <td><%= link_to @book.rented_by, url(:show_user, :uid => rent_history.uid) %></td>
   </tr>
 <% end %>
 </table>

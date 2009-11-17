@@ -39,7 +39,11 @@ class User
     def users_for_select
       User.all(:fields => %w(uid full_name), :order => 'uid').map { |u| [u.uid, u.full_name] }.insert(0, ["", "-----"])
     end
+  end
 
+  
+  def history
+    RentHistory.find(:all, :uid => self.uid, :order => 'from_date desc', :limit => 10)
   end
   
   def add_permission!(permission_name, obj = nil)
