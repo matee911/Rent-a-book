@@ -28,6 +28,7 @@
 Merb.logger.info("Compiling routes...")
 Merb::Router.prepare do
   resources :books, :identify => :slug
+#  resources :users, :identify => :uid
   # RESTful routes
   # resources :posts
   
@@ -38,6 +39,7 @@ Merb::Router.prepare do
     match("/").to(:controller => 'books')
   end
 
+  match("/users/:uid", :uid => /^[a-z0-9\.]+$/i).to(:controller => "users", :action => "show").name(:show_user)
   match("/books/:slug/rent", :slug => /^[a-zA-Z0-9\-]+$/).to(:controller => "books", :action => "rent").name(:rent_book)
   match("/books/:slug/give_back", :slug => /^[a-zA-Z0-9\-]+$/).to(:controller => "books", :action => "give_back").name(:give_back_book)
   match("/ajax/books/hint/:isbn", :isbn => /^[\d\-]+$/).to(:controller => "books", :action => "hint")

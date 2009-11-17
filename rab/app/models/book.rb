@@ -33,6 +33,8 @@ class Book
   key :status, Integer, :numeric => true # eg. 0 - n/a, 1 - proposition, 2 - waiting, 3 - available, 4 - rented
   key :tags, Array
 
+  many :rent_historys
+
 #  validates_numericality_of :status
   
   class << self
@@ -152,8 +154,7 @@ class Book
 
   def rent(user)
     raise Exception unless self.can_rent?
-    rh = RentHistory.new(:book_id => self._id, :uid => user.uid, :from_date => Time.now)
-    rh.save
+    self.rent_historys.create(:book_id => self._id, :uid => user.uid, :from_date => Time.now)
     self.status = STATUS_TYPES[:rented][0]
     self.save
   end
