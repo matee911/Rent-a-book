@@ -11,7 +11,16 @@ class Books < Application
 
   def index
     page = params.delete(:page) || 1
-    @books = Book.paginate(:page=> page, :per_page => 6, :order => 'title')
+    letter = params.delete(:letter)
+
+    options = {:page => page, :per_page => 6, :order => 'title'}
+
+    if !letter.nil? and ('A'..'Z').include? letter.upcase
+      options[:title] = /^#{letter.upcase}/i
+    elsif ('0'..'9').include? letter
+      options[:title] = /^[0-9]/
+    end
+    @books = Book.paginate(options)
     display @books
   end
 
