@@ -1,0 +1,5 @@
+:next_label: "Następna strona &raquo;"
+:prev_label: "&laquo; Poprzednia strona"
+:show_empty_prev: false
+:show_empty_next: false
+# :default_css: false
