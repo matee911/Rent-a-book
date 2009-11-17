@@ -15,7 +15,7 @@ class Books < Application
 
     options = {:page => page, :per_page => 6, :order => 'title'}
 
-    if ('A'..'Z').include? letter.upcase
+    if !letter.nil? and ('A'..'Z').include? letter.upcase
       options[:title] = /^#{letter.upcase}/i
     elsif ('0'..'9').include? letter
       options[:title] = /^[0-9]/
