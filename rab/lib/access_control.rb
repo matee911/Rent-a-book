@@ -11,9 +11,13 @@ module AccessControl
     def access_control(opts = {}, &block)
       before(nil, opts) do |controller|
         controller.ensure_authenticated
+        controller.disallow_all
       end
       before(nil, opts) do |controller|
         controller.instance_eval(&block)
+      end
+      before(nil, opts) do |controller|
+        controller.check_access
       end
     end
   end
@@ -22,9 +26,28 @@ module AccessControl
     def allow_if(permission, opts = {})
       if opts[:to].nil? || opts[:to].include?(action_name.to_sym)
         unless current_user.has_permission?(permission, opts[:obj])
-          raise AccessControl::AccessDenied
+          deny_access
+        else
+          grant_access
         end
       end
+    end
+    
+    def disallow_all
+      @allowed ||= false
+    end
+    
+    def deny_access
+      @allowed = false unless @allowed == true
+    end
+    
+    def grant_access
+      @allowed = true
+    end
+    
+    def check_access
+      puts "dupadupa"
+      raise AccessControl::AccessDenied unless @allowed == true
     end
     
   end
