@@ -27,13 +27,14 @@ module AccessControl
       if opts[:to].nil? || opts[:to].include?(action_name.to_sym)
         unless current_user.has_permission?(permission, opts[:obj])
           deny_access
+        else
+          grant_access
         end
       end
     end
     
     def disallow_all
       @allowed ||= false
-      puts "elotest"
     end
     
     def deny_access
@@ -45,6 +46,7 @@ module AccessControl
     end
     
     def check_access
+      puts "dupadupa"
       raise AccessControl::AccessDenied unless @allowed == true
     end
     
