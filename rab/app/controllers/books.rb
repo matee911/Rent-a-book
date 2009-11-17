@@ -10,7 +10,8 @@ class Books < Application
   # end
 
   def index
-    @books = Book.find(:all, :order => 'title')
+    page = params.delete(:page) || 1
+    @books = Book.paginate(:page=> page, :per_page => 6, :order => 'title')
     display @books
   end
 
