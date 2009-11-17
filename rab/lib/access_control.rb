@@ -37,6 +37,12 @@ module AccessControl
       @allowed ||= false
     end
     
+    def allow_all(opts = {})
+      if opts[:to].nil? || opts[:to].include?(action_name.to_sym)
+        @allowed = true
+      end
+    end
+    
     def deny_access
       @allowed = false unless @allowed == true
     end
@@ -46,7 +52,6 @@ module AccessControl
     end
     
     def check_access
-      puts "dupadupa"
       raise AccessControl::AccessDenied unless @allowed == true
     end
     
