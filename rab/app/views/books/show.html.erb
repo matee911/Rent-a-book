@@ -2,7 +2,7 @@
 <% throw_content :menu do %>
   | <%= link_to 'Lista', resource(:books) %> |
   <%= link_to 'Edytuj', resource(@book, :edit) %> |
-  <%#= delete_button(@book, "Usuń #{@book.title}") %>
+  <%= delete_button(@book, "Usuń #{@book.title}") %>
   <% if @book.can_rent? %>
     <%= link_to 'Biorę!', url(:rent_book, :slug => @book.slug) %>
   <% else %>
