@@ -45,7 +45,20 @@ class User
   def history
     RentHistory.find(:all, :uid => self.uid, :order => 'from_date desc', :limit => 10)
   end
-  
+
+  def set_god_permissions!
+    rights = [
+      ["can_edit", "Book"],
+      ["can_give_back", "Book"],
+      ["can_add", "Book"],
+      ["can_destroy", "Book"]
+    ]
+    rights.each do |perm_name, obj|
+      self.add_permission!(perm_name, obj) unless self.has_permission?(perm_name, obj)
+    end
+  end
+
+  # ACL methods
   def add_permission!(permission_name, obj = nil)
     p = Permission.build_permission(permission_name, obj)
     self.permissions << p

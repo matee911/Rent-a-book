@@ -51,6 +51,8 @@ class Book
       doc = Nokogiri::XML(open('http://books.google.com/books/feeds/volumes?q=isbn:%s' % isbn))
       doc.remove_namespaces! # yup! i'll do
       entry = doc.xpath('/feed/entry').first
+      # unknown book
+      return nil if entry.nil?
       entry_url = entry.xpath('id').text
 
       doc = Nokogiri::XML(open(entry_url))
@@ -67,7 +69,7 @@ class Book
       # doc.xpath('/entry/creator').text
       hint
     end
-    
+
     def valid_isbn13?(isbn_str)
       if isbn_str.match(ISBN13_RX)
         isbn_arr = isbn_str.upcase.gsub(/\ |-/, '').split('')
@@ -96,6 +98,14 @@ class Book
         (checksum % 11) == check_value
       else
         false
+      end
+    end
+
+    def valid_isbn?(isbn_str)
+      if isbn_str.match(ISBN10_RX)
+        valid_isbn10? isbn_str
+      elsif isbn_str.match(ISBN13_RX)
+        valid_isbn13? isbn_str
       end
     end
     

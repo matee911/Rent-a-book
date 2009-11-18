@@ -49,7 +49,7 @@
   <tr>
     <td><%= rent_history.from_date.to_s %></td>
     <td><%= rent_history.to_date.to_s %></td>
-    <td><%= link_to @book.rented_by, url(:show_user, :uid => rent_history.uid) %></td>
+    <td><%= link_to rent_history.uid, url(:show_user, :uid => rent_history.uid) %></td>
   </tr>
 <% end %>
 </table>

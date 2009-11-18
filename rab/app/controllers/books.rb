@@ -6,8 +6,13 @@ class Books < Application
   # end
   
   access_control(:exclude => :index) do
-    allow_if "can_edit", :to => [:edit], :obj => "Book"
+    allow_if "can_edit", :to => [:edit, :update], :obj => "Book"
+    allow_if "can_give_back", :to => [:give_back], :obj => "Book"
+    allow_if "can_add", :to => [:new, :create], :obj => "Book"
+    allow_if "can_destroy", :to => [:destroy], :obj => "Book"
+    allow_all :to => [:rent]
     allow_all :to => [:show]
+    allow_all :to => [:hint]
   end
 
   def index
@@ -18,7 +23,7 @@ class Books < Application
 
     if !letter.nil? and ('A'..'Z').include? letter.upcase
       options[:title] = /^#{letter.upcase}/i
-    elsif ('0'..'9').include? letter
+    elsif !letter.nil? and letter == '0':
       options[:title] = /^[0-9]/
     end
     @feed_paginator = {}
@@ -92,6 +97,7 @@ class Books < Application
 
   # Ajax controller actions
   def hint(isbn)
+    raise NotFound unless Book.valid_isbn?(isbn)
     render Book.hint_book(isbn).to_json, :format => :json
   end
 
