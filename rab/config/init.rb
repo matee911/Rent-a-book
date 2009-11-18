@@ -20,7 +20,9 @@ Merb::BootLoader.before_app_loads do
   require 'auth'
   require 'access_control'
   require 'mongo_paginator'
+  require 'main_menu'
   Merb::Controller.send(:include, Merb::PaginationHelper)
+  Merb::Controller.send(:include, Merb::MenuHelper)
   # This will get executed after dependencies have been loaded but before your app's classes have loaded.
 end
  
