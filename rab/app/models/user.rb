@@ -15,7 +15,7 @@ class User
   key :uid, String, :required => true
   key :full_name, String, :required => true
   key :mails, Array
-  
+  key :jpegPhoto, Binary
   many :permissions
   
   class << self
@@ -29,6 +29,7 @@ class User
         end
         @dbuser.full_name = user.cn
         @dbuser.mails = user.mail
+#        @dbuser.jpegPhoto = user.jpeg_photo # dsnt wrk wth mongo-0.16 ?!
         if @dbuser.save
           return @dbuser
         end
@@ -77,7 +78,7 @@ class User
     self.permissions.delete(permission)
     self.save!
   end
-  
+
   alias_method :__old_method_missing, :method_missing
   
   def method_missing(method, *args)

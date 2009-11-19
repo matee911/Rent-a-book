@@ -33,6 +33,7 @@ dependency "merb-exceptions", merb_gems_version
 # 
 # dependency "merb_datamapper", merb_gems_version
 
+dependency "mongo"#, ">=0.16"
 dependency "mongo_mapper"
 dependency "merb_mongomapper"
 dependency "ruby-net-ldap", :require_as => "net/ldap"

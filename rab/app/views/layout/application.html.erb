@@ -15,7 +15,7 @@
       <h1>Rent-a-book</h1>
       <div class="userMenu">
         <% if session.authenticated? and current_user %>
-          <p><%= current_user.full_name %>, <%= link_to 'Wyloguj', url(:logout) %></p>
+          <p><strong><%= link_to current_user.full_name, resource(current_user) %></strong>, <%= link_to 'Wyloguj', url(:logout) %></p>
         <% end %>
       </div>
     </div>
