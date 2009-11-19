@@ -9,8 +9,8 @@
   </tr>
 <% @user.history.each do |rent_history| %>
   <tr>
-    <td><%= rent_history.from_date.to_s %></td>
-    <td><%= rent_history.to_date.to_s %></td>
+    <td><%= readable_date rent_history.from_date %></td>
+    <td><%= readable_date rent_history.to_date %></td>
     <td>
       <% if !rent_history.book.nil? %><%= link_to rent_history.book.title, resource(rent_history.book) %><% end %>
     </td>

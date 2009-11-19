@@ -1,6 +1,5 @@
 
 <% throw_content :menu do %>
-  | <%= link_to 'Lista', resource(:books) %> |
   <%= link_to 'Edytuj', resource(@book, :edit) %> |
   <%= delete_button(@book, "Usuń #{@book.title}") %>
   <% if @book.can_rent? %>
@@ -47,8 +46,8 @@
   </tr>
 <% @book.history.each do |rent_history| %>
   <tr>
-    <td><%= rent_history.from_date.to_s %></td>
-    <td><%= rent_history.to_date.to_s %></td>
+    <td><%= readable_date rent_history.from_date %></td>
+    <td><%= readable_date rent_history.to_date %></td>
     <td><%= link_to rent_history.uid, url(:show_user, :uid => rent_history.uid) %></td>
   </tr>
 <% end %>
