@@ -1,1 +1,12 @@
-You're in index of the Users controller.
+
+<h2>Użyszkodniki</h2>
+
+<ul>
+  <% @users.each do |user| %>
+  <li>
+    <%= link_to user.full_name, resource(user) %>
+  </li>
+  <% end %>
+</ul>
+<%= paginate @users, :url => resource(:users) %>
+

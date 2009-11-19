@@ -25,12 +25,15 @@
 # You can also use regular expressions, deferred routes, and many other options.
 # See merb/specs/merb/router.rb for a fairly complete usage sample.
 
+UID_RX = /^[a-z0-9\.]+$/i
+SLUG_RX = /^[a-zA-Z0-9\-]+$/
+ISBN_RX = /^[\d\-]+$/
+
 Merb.logger.info("Compiling routes...")
 Merb::Router.prepare do
-  resources :books, :identify => :slug
-#  resources :users, :identify => :uid
   # RESTful routes
-  # resources :posts
+  resources :books, :identify => :slug
+  resources :users, :identify => :uid, :uid => UID_RX
   
   # Adds the required routes for merb-auth using the password slice
   slice(:merb_auth_slice_password, :name_prefix => nil, :path_prefix => "")
@@ -39,18 +42,15 @@ Merb::Router.prepare do
     match("/").to(:controller => 'books')
   end
 
-  match("/users/:uid", :uid => /^[a-z0-9\.]+$/i).to(:controller => "users", :action => "show").name(:show_user)
-  match("/books/:slug/rent", :slug => /^[a-zA-Z0-9\-]+$/).to(:controller => "books", :action => "rent").name(:rent_book)
-  match("/books/:slug/give_back", :slug => /^[a-zA-Z0-9\-]+$/).to(:controller => "books", :action => "give_back").name(:give_back_book)
-  match("/ajax/books/hint/:isbn", :isbn => /^[\d\-]+$/).to(:controller => "books", :action => "hint")
-  # match("/books/:slug", :slug => /^[a-zA-Z0-9\-]+$/).to(:controller => "books")
+  match("/users/:uid", :uid => UID_RX).to(:controller => "users", :action => "show").name(:show_user)
+  match("/books/:slug/rent", :slug => SLUG_RX).to(:controller => "books", :action => "rent").name(:rent_book)
+  match("/books/:slug/give_back", :slug => SLUG_RX).to(:controller => "books", :action => "give_back").name(:give_back_book)
+  match("/ajax/books/hint/:isbn", :isbn => ISBN_RX).to(:controller => "books", :action => "hint")
 
   # This is the default route for /:controller/:action/:id
   # This is fine for most cases.  If you're heavily using resource-based
   # routes, you may want to comment/remove this line to prevent
   # clients from calling your create or destroy actions with a GET
   default_routes
-  
-  # Change this for your home page to be available at /
-  # match('/').to(:controller => 'whatever', :action =>'index')
+
 end
