@@ -17,6 +17,13 @@ class User
   key :mails, Array
 #  key :jpegPhoto, Binary
   many :permissions
+
+  ADMIN_PERMISSIONS = [
+      ["can_edit", "Book"],
+      ["can_give_back", "Book"],
+      ["can_add", "Book"],
+      ["can_destroy", "Book"]
+    ]
   
   class << self
     def authenticate(login, password)
@@ -53,6 +60,7 @@ class User
     end
   end
 
+  
   def avatar_thumbnail
     '/assets/avatars/%s.jpg' % self.uid
   end
@@ -60,21 +68,20 @@ class User
   def has_avatar?
     File.exist?(Merb.root + "/public" + self.avatar_thumbnail)
   end
-
   
   def history
     RentHistory.find(:all, :uid => self.uid, :order => 'from_date desc', :limit => 10)
   end
 
   def set_god_permissions!
-    rights = [
-      ["can_edit", "Book"],
-      ["can_give_back", "Book"],
-      ["can_add", "Book"],
-      ["can_destroy", "Book"]
-    ]
-    rights.each do |perm_name, obj|
+    ADMIN_PERMISSIONS.each do |perm_name, obj|
       self.add_permission!(perm_name, obj) unless self.has_permission?(perm_name, obj)
+    end
+  end
+
+  def remove_god_permissions!
+    ADMIN_PERMISSIONS.each do |perm_name, obj|
+      self.remove_permission(perm_name, obj) if self.has_permission?(perm_name, obj)
     end
   end
 
@@ -91,7 +98,7 @@ class User
     !permission.nil?
   end
   
-  def remove_permission(permission_name, obj = nil)
+  def remove_permission!(permission_name, obj = nil)
     p = Permission.build_permission(permission_name, obj)
     permission = self.permissions.select { |perm| perm = p }[0]
     self.permissions.delete(permission)
@@ -105,10 +112,7 @@ class User
     unless match[0].nil?
       return self.has_permission?(match[0][0], args[0])
     end
-    
     return __old_method_missing(method, *args)
-    
   end
 
-  
 end
