@@ -33,9 +33,14 @@ dependency "merb-exceptions", merb_gems_version
 # 
 # dependency "merb_datamapper", merb_gems_version
 
-dependency "mongo"#, ">=0.16"
-dependency "mongo_mapper"
+# mwahaha... now it works:D
 dependency "merb_mongomapper"
+dependency "mongo_mapper"
+dependency "mongo"
+
+
+
+
 dependency "ruby-net-ldap", :require_as => "net/ldap"
 dependency "nokogiri" # 1.4.0
 dependency 'quick_magick'

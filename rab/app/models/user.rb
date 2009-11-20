@@ -15,7 +15,7 @@ class User
   key :uid, String, :required => true
   key :full_name, String, :required => true
   key :mails, Array
-  key :jpegPhoto, Binary
+#  key :jpegPhoto, Binary
   many :permissions
   
   class << self
@@ -30,6 +30,17 @@ class User
         @dbuser.full_name = user.cn
         @dbuser.mails = user.mail
 #        @dbuser.jpegPhoto = user.jpeg_photo # dsnt wrk wth mongo-0.16 ?!
+        if user.jpeg_photo
+          unless File.exist?(Merb.root + "/public/assets/avatars")
+            FileUtils.mkdir_p Merb.root + "/public/assets/avatars"
+          end
+          img = QuickMagick::Image.from_blob(user.jpeg_photo).first
+          img.format = 'jpg'
+          img.resize "100x100>"
+          # place for sharpening
+          path = Merb.root + '/public/assets/avatars/'
+          img.save path+@dbuser.uid+'.jpg'
+        end
         if @dbuser.save
           return @dbuser
         end
@@ -40,6 +51,14 @@ class User
     def users_for_select
       User.all(:fields => %w(uid full_name), :order => 'uid').map { |u| [u.uid, u.full_name] }.insert(0, ["", "-----"])
     end
+  end
+
+  def avatar_thumbnail
+    '/assets/avatars/%s.jpg' % self.uid
+  end
+
+  def has_avatar?
+    File.exist?(Merb.root + "/public" + self.avatar_thumbnail)
   end
 
   

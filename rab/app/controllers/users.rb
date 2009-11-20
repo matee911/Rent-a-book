@@ -2,7 +2,7 @@ class Users < Application
 
   def index
     page = params.delete(:page) || 1
-    options = {:page => page, :per_page => 6, :order => 'title', :field => 'uid, full_name'}
+    options = {:page => page, :per_page => 6, :order => 'full_name'}
     @users = User.paginate(options)
     display @users
   end
