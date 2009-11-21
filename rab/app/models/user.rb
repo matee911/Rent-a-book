@@ -47,6 +47,9 @@ class User
           # place for sharpening
           path = Merb.root + '/public/assets/avatars/'
           img.save path+@dbuser.uid+'.jpg'
+        elsif user.jpeg_photo.nil? and self.has_avatar?
+          # ldap data without photo but we have avatar on disk
+          FileUtils.rm(Merb.root + '/public/assets/avatars/%s.jpg' % @dbuser.uid)
         end
         if @dbuser.save
           return @dbuser
