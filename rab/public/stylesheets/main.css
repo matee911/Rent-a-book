@@ -1,0 +1,132 @@
+html {
+  background: #45617E url(/images/grad-2.gif) repeat-x scroll 0 0;
+  color: #4D4D4D;
+  font-family: 'Lucida Grande',Lucida,Verdana,Arial,Helvetica,sans-serif;
+}
+
+.innerCenter {
+  width: 998px;
+  margin: 0 auto;
+}
+
+#topNav {
+  float:right;
+  padding:20px 40px 0 0;
+}
+
+#topNav li {
+  display:inline;
+  float:left;
+  font-size:12px;
+}
+a {
+  outline-color:-moz-use-text-color;
+  outline-style:none;
+  outline-width:medium;
+  text-decoration:none;
+}
+#topNav a {
+  color:#496179;
+  float:left;
+  font-weight:bold;
+  text-decoration:none;
+}
+#logo a {
+  display:block;
+  height:83px;
+  overflow:hidden;
+/*  text-indent:-9999px;*/
+}
+#branding {
+  background:transparent url(/images/top-black-998.png) no-repeat scroll 0 0;
+  clear:both;
+  padding:0 14px;
+  width:970px;
+}
+
+#branding .inner {
+  background:transparent url(/images/bottom-black-short.png) no-repeat scroll 0 100%;
+  clear:both;
+  float:left;
+  padding:10px 10px 17px;
+  width:950px;
+}
+
+#logo {
+  float:left;
+  padding:31px 0 17px 28px;
+  width:116px;
+}
+
+#mainNav {
+  background:transparent url(/images/main-nav-m.png) no-repeat left center;
+  display:inline;
+  float:right;
+/*  height:47px;*/
+  margin:52px 44px 22px 0;
+  overflow:hidden;
+  width:636px;
+}
+
+#mainNav ul {
+  width:100%;
+  padding-left: 20px;
+}
+
+#mainNav ul li a {
+  color: #858585;
+  font-weight: bold;
+  font-size: 14px;
+}
+
+#mainNav ul li.active a {
+  color: #fff;
+}
+
+#mainNav li {
+  padding: 20px 10px;
+  display:inline;
+  float:left;
+  list-style-image:none;
+  list-style-position:outside;
+  list-style-type:none;
+  margin:0 !important;
+}
+
+#content .innerCenter {
+  background:transparent url(/images/sheet-middle.png) repeat-y scroll 50% 0;
+  min-height:900px;
+  padding:0 24px;
+  width:950px;
+}
+
+#content .innerCenter .innerGrid {
+  background:transparent url(/images/content-top-gradient.gif) no-repeat scroll 0 0;
+  width:950px;
+}
+
+
+.mainContent {
+  color:#000000;
+  float:left;
+  padding:20px 40px 20px 24px;
+  width:552px;
+}
+
+.mainContent {
+  padding:20px 10px 20px 0;
+  width:606px;
+}
+
+.letters {
+  font-size: 12px;
+}
+
+.supplementaryContent {
+  background:transparent url(/images/sidebar-grad.jpg) no-repeat scroll 0 43px;
+  color:#4D4D4D;
+  float:left;
+  min-height:770px;
+  padding:50px 20px 20px 25px;
+  width:289px;
+}

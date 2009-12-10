@@ -2,10 +2,10 @@
 <% throw_content :menu do %>
  | <%= link_to 'Dodaj', resource(:books, :new) %>
 <% end %>
- 
+
 <h2>Książki</h2>
 
-<div><%= letters :page => @books.current_page %></div>
+<div class="letters"><%= letters :page => @books.current_page %></div>
 
 <ul>
   <% @books.each do |book| %>
