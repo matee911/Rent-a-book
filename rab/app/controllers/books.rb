@@ -19,7 +19,7 @@ class Books < Application
     page = params.delete(:page) || 1
     letter = params.delete(:letter)
 
-    options = {:page => page, :per_page => 6, :order => 'title'}
+    options = {:page => page, :per_page => 9, :order => 'title'}
 
     if !letter.nil? and ('A'..'Z').include? letter.upcase
       options[:title] = /^#{letter.upcase}/i
