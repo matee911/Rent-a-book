@@ -17,7 +17,7 @@
         <div class="innerCenter">
           <div id="topNav">
             <ul>
-              <li><%= current_user.full_name %></li>
+              <li><%= current_user.full_name if session.authenticated? %></li>
             </ul>
           </div>
           <div id="branding">
@@ -32,7 +32,7 @@
                     add_menu_item "Książki", resource(:books), :identify_by => { :controller => "books" }
                   end %>
                 <ul style="margin-left: 350px">
-                  <li><%= link_to "<span>logout</span>", url(:logout) %></li>
+                  <li><%= link_to("<span>logout</span>", url(:logout)) if session.authenticated? %></li>
                 </ul>
                   <div class="clear"></div>
               </div>
