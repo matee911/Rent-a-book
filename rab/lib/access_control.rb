@@ -1,5 +1,5 @@
 module AccessControl
-  class AccessDenied < Exception
+  class AccessDenied < Merb::ControllerExceptions::Forbidden
   end
   
   def self.included(controller)

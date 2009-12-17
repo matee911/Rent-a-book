@@ -37,10 +37,11 @@ class User
         @dbuser.full_name = user.cn
         @dbuser.mails = user.mail
 #        @dbuser.jpegPhoto = user.jpeg_photo # dsnt wrk wth mongo-0.16 ?!
-        if user.jpeg_photo
+        if !user.jpeg_photo.empty? # nie chce mi sie zglebiac ale QuickMagic sypal jakims error, moze dlatego ze dostawal pusty array
           unless File.exist?(Merb.root + "/public/assets/avatars")
             FileUtils.mkdir_p Merb.root + "/public/assets/avatars"
           end
+          debugger
           img = QuickMagick::Image.from_blob(user.jpeg_photo).first
           img.format = 'jpg'
           img.resize "100x100>"
@@ -105,6 +106,7 @@ class User
     p = Permission.build_permission(permission_name, obj)
     permission = self.permissions.select { |perm| perm = p }[0]
     self.permissions.delete(permission)
+    debugger
     self.save!
   end
 

@@ -2,30 +2,37 @@
   form_action = @book.new_record? ? resource(:books) : resource(@book)
 %>
 
-<%= form_for @book, :action => form_action do %>
+<%= form_for @book, :action => form_action, :class=>"book-form" do %>
   <%= error_messages_for @book %>
-  <p>
+  <p class="inline">
     <%= text_field :title, :label => "Tytuł" %>
+    <br class="clear"/>
   </p>
-  <p>
+  <p class="inline">
     <%= text_area :description, :label => "Opis", :rows => 10, :cols => 80 %>
+    <br class="clear"/>
   </p>
-  <p>
+  <p class="inline">
     <%= select :status, :collection => Book.statuses_for_select, :label => 'Status' %>
+    <br class="clear"/>
   </p>
 
-  <p>
+  <p class="inline">
     <%= select :owner_uid, :collection => User.users_for_select, :label => 'Właściciel' %>
+    <br class="clear"/>
   </p>
 
-  <p>
+  <p class="inline">
     <%= text_field :cover_url, :label => "Cover URL" %>
+    <br class="clear"/>
   </p>
-  <p>
+  <p class="inline">
     <%= text_field :shop_url, :label => "Shop URL" %>
+    <br class="clear"/>
   </p>
-  <p>
+  <p class="inline">
     <%= text_field :isbn, :label => "ISBN" %>
+    <br class="clear"/>
   </p>
   <%= submit "Zapisz" %>
 <% end =%>

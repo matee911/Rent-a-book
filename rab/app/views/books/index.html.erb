@@ -1,24 +1,38 @@
 
-<% throw_content :menu do %>
- | <%= link_to 'Dodaj', resource(:books, :new) %>
+<% throw_content :for_sidebar do %>
+ <%= link_to('Dodaj', resource(:books, :new)) if current_user.has_permission?(:can_add) %>
 <% end %>
 
 <h2>Książki</h2>
 
-<div class="letters"><%= letters :page => @books.current_page %></div>
+<div id="search-results">
+  <div>
+    <div id="search-filter">
+      <div class="letters"><%= letters :page => @books.current_page %></div>
+    </div>
+  </div>
+</div>
 
-<ul>
-  <% @books.each do |book| %>
-  <li>
-    <% if book.has_cover? %>
-      <%= image_tag book.cover_thumbnail %>
+<table id="books-listing">
+  <tbody>
+    <% @books.each do |book| %>
+    <tr>
+      <td class="cover">
+        <% if book.has_cover? %>
+          <%= image_tag book.cover_thumbnail %>
+        <% end %>
+      </td>
+      <td class="title">
+        <%= link_to "#{book.title}", resource(book) %>
+      </td>
+      <td class="can-rent">
+        <% if book.can_rent? %>
+          Yes, U can!
+        <% end %>
+      </td>
+    </tr>
     <% end %>
-    <%= link_to "#{book.title}", resource(book) %>
-
-    <% if book.can_rent? %>
-      Yes, U can!
-    <% end %>
-  </li>
-  <% end %>
-</ul>
+  </tbody>
+</table>
 <%= paginate @books, :url => resource(:books, @feed_paginator) %>
+

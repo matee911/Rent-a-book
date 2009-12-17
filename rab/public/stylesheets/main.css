@@ -25,6 +25,11 @@ a {
   outline-width:medium;
   text-decoration:none;
 }
+
+td a, .paginated a, .supplementaryContent a, .book-header a {
+    color:#DD1F00;
+}
+
 #topNav a {
   color:#496179;
   float:left;
@@ -55,7 +60,7 @@ a {
 #logo {
   float:left;
   padding:31px 0 17px 28px;
-  width:116px;
+  width:140px;
 }
 
 #mainNav {
@@ -114,8 +119,8 @@ a {
 }
 
 .mainContent {
-  padding:20px 10px 20px 0;
-  width:606px;
+  padding:20px 10px 20px 10px;
+  width:596px;
 }
 
 .letters {
@@ -129,4 +134,137 @@ a {
   min-height:770px;
   padding:50px 20px 20px 25px;
   width:289px;
+}
+
+#search-filter a {
+    color:#DD1F00;
+    font-weight:bold;
+    text-decoration:underline;
+}
+
+table {
+border-collapse:collapse;
+font-size:inherit;
+table-layout:fixed;
+width: 100%;
+}
+
+table td {
+    padding: 3px 10px 4px 0;
+    vertical-align: top;
+}
+
+#books-listing {
+border-top:2px solid #EBE9E2;
+clear:both;
+table-layout:fixed;
+width:606px;
+margin-top: 15px;
+}
+
+#books-listing tbody th, #books-listing tbody td {
+border-bottom:2px solid #EBE9E2;
+}
+
+#books-listing .cover {
+    width: 70px;
+    text-align: center;
+    height: 80px;
+    padding: 3px 10px 4px 0;
+}
+
+#books-listing .can-rent {
+    width: 160px;
+}
+
+#books-listing .cover img {
+    display: block;
+}
+
+.book-header {
+clear:left;
+float:left;
+width:100%;
+}
+
+.book-header .book-logo {
+margin:0 0 10px;
+}
+
+.l-r {
+background:#F9F6EE url(/images/lr.gif) no-repeat scroll 100% 100%;
+color:#999389;
+float:left;
+margin:0 0 18px -5px;
+position:relative;
+}
+
+.l-l {
+background:transparent url(/images/ll.gif) no-repeat scroll 0 100%;
+float:left;
+padding:0 0 6px;
+}
+
+.u-l {
+background:transparent url(/images/ul.gif) no-repeat scroll 0 0;
+float:left;
+}
+
+.u-l p {
+background:transparent url(/images/ur.gif) no-repeat scroll 100% 0;
+float:left;
+line-height:1.2;
+margin:0 !important;
+padding:4px 12px 0;
+}
+
+.book-header h4 {
+float:none !important;
+margin-bottom:0.3em;
+}
+
+#book-header .meta-heading, #content .meta-thin-lf {
+-x-system-font:none !important;
+color:#DD1F00 !important;
+font-family:Arial,Helvetica,sans-serif !important;
+font-size:42px !important;
+font-size-adjust:none !important;
+font-stretch:normal !important;
+font-style:normal !important;
+font-variant:normal !important;
+font-weight:normal !important;
+line-height:42px !important;
+margin:8px 0 10px !important;
+padding:0 !important;
+}
+
+.cufon-canvas canvas {
+position:relative;
+}
+
+.book-extra-info {
+    color: #888;
+    margin-bottom: 15px;
+    font-weight: bold;
+    font-size: 12px;
+    line-height: 1.2;
+}
+
+.book-extra-info label {
+    font-weight: normal;
+    
+}
+
+.supplementaryContent form {
+    margin: 10px 0;
+}
+
+#branding h1 a {
+    color: #fff;
+    font-size: 20px;
+}
+
+form p.inline label {
+    float: left;
+    width: 120px;
 }

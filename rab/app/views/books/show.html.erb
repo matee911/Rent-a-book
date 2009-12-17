@@ -1,29 +1,46 @@
 
-<% throw_content :menu do %>
-  <%= link_to 'Edytuj', resource(@book, :edit) %> |
-  <%= delete_button(@book, "Usuń #{@book.title}") %>
+<% throw_content :for_sidebar do %>
+  <%= link_to('Edytuj', resource(@book, :edit)) if current_user.has_permission?(:can_edit, "Book") %>
+  <%= delete_button(@book, "Usuń #{@book.title}") if current_user.has_permission?(:can_destroy, "Book") %>
   <% if @book.can_rent? %>
     <%= link_to 'Biorę!', url(:rent_book, :slug => @book.slug) %>
   <% else %>
     <% if @book.rented_by?(session.user) %>
-      <%= link_to 'Oddaję!', url(:give_back_book, :slug => @book.slug) %>
+      <%= link_to('Oddaję!', url(:give_back_book, :slug => @book.slug)) if current_user.has_permission?(:can_give_back, @book) %>
     <% end %>
-  <% end %>
+  <% end %><br/>
 <% end %>
 
-<h2><%= @book.title %></h2>
-
-<% if @book.has_cover? %>
-  <%= image_tag @book.cover_thumbnail %>
-<% end %>
-
-<ul>
-  <li>
-    <label>Status:</label> <%= @book.status_readable %>
-    <% if @book.rented? %>
-      (<%= link_to @book.rented_by, url(:show_user, :uid => @book.rented_by) %>)
+<div class="book-header">
+  <div class="book-logo">
+    <% if @book.has_cover? %>
+      <%= image_tag @book.cover_thumbnail %>
     <% end %>
-  </li>
+  </div>
+  
+  <h4 class="meta-thin-lf">
+      <span class="cufon cufon-canvas" style="width: 89px; height: 42px;">
+        <span class="cufon-alt"><%= @book.title %></span>
+      </span>
+  </h4>
+  
+  
+  
+  <div class="company-location l-r">
+    <div class="l-l">
+      <div class="u-l">
+        <p><label>Status:</label> <%= @book.status_readable %>
+          <% if @book.rented? %>
+            (<%= link_to @book.rented_by, url(:show_user, :uid => @book.rented_by) %>)
+          <% end %>
+        </p>
+      </div>
+    </div>
+  </div>
+  
+</div>
+
+<ul class="book-extra-info">
   <% if @book.isbn %>
   <li><label>ISBN:</label> <%= @book.isbn %></li>
   <% end %>
@@ -33,8 +50,11 @@
   <% if @book.shop_url %>
   <li><label>Sklep:</label> <%= @book.shop_url %></li>
   <% end %>
-  <li><label>Opis:</label> <%= RedCloth.new(@book.description).to_html %></li>
 </ul>
+
+<div class="book-desc">
+  <%= RedCloth.new(@book.description).to_html if @book.description %>
+</div>
 
 <hr />
 

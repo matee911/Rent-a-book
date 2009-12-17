@@ -1,9 +1,17 @@
 
-<% throw_content :menu do %>
+<% throw_content :for_sidebar do %>
   <%= link_to 'Wróć', resource(@book) %>
 <% end %>
+
+<div class="book-header">
   
-<h2><%= @book.title %></h2>
+  <h4 class="meta-thin-lf">
+      <span class="cufon cufon-canvas" style="width: 89px; height: 42px;">
+        <span class="cufon-alt"><%= @book.title %></span>
+      </span>
+  </h4>
+  
+</div>
 
 <%= partial 'edit_form.html', :with => @book %>
 

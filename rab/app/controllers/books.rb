@@ -7,7 +7,7 @@ class Books < Application
   
   access_control(:exclude => :index) do
     allow_if "can_edit", :to => [:edit, :update], :obj => "Book"
-    allow_if "can_give_back", :to => [:give_back], :obj => "Book"
+    allow_all :to => [:give_back] # permission sprawdze dla konkretnego obiektu
     allow_if "can_add", :to => [:new, :create], :obj => "Book"
     allow_if "can_destroy", :to => [:destroy], :obj => "Book"
     allow_all :to => [:rent]
@@ -19,7 +19,7 @@ class Books < Application
     page = params.delete(:page) || 1
     letter = params.delete(:letter)
 
-    options = {:page => page, :per_page => 6, :order => 'title'}
+    options = {:page => page, :per_page => 8, :order => 'title'}
 
     if !letter.nil? and ('A'..'Z').include? letter.upcase
       options[:title] = /^#{letter.upcase}/i
@@ -85,13 +85,16 @@ class Books < Application
     @book = Book.find_by_slug(slug)
     raise NotFound unless @book
     @book.rent(session.user)
+    current_user.add_permission!(:can_give_back, @book)
     redirect resource(@book)
   end
 
   def give_back(slug)
     @book = Book.find_by_slug(slug)
     raise NotFound unless @book
+    raise AccessControl::AccessDenied unless current_user.has_permission?(:can_give_back, @book)
     @book.give_back(session.user)
+    current_user.remove_permission!(:can_give_back, @book)
     redirect resource(@book)
   end
 
