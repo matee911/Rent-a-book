@@ -1,6 +1,8 @@
 
 <% throw_content :for_sidebar do %>
  <%= link_to('Dodaj', resource(:books, :new)) if current_user.has_permission?(:can_add) %>
+
+ <%= image_tag "mongodb.png" %>
 <% end %>
 
 <h2>Książki</h2>
