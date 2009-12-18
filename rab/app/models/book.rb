@@ -134,6 +134,10 @@ class Book
     self.status == STATUS_TYPES[:available][0]
   end
 
+  def is_proposition?
+    self.status == STATUS_TYPES[:proposition][0]
+  end
+
   def cover
     IMAGES_PATH + "cover-%s.jpg" % self._id
   end

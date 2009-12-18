@@ -29,6 +29,9 @@
         <% if book.can_rent? %>
           Yes, U can!
         <% end %>
+        <% if book.is_proposition? %>
+          Propozycja
+        <% end %>
       </td>
     </tr>
     <% end %>
