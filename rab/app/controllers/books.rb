@@ -17,9 +17,15 @@ class Books < Application
 
   def index
     page = params.delete(:page) || 1
+    status = params.delete(:status) || nil
     letter = params.delete(:letter)
 
     options = {:page => page, :per_page => 8, :order => 'title'}
+    unless status.nil?:
+        options[:status] = status.to_i
+    else
+        options[:status] = {'$ne' => 1}
+    end
 
     if !letter.nil? and ('A'..'Z').include? letter.upcase
       options[:title] = /^#{letter.upcase}/i
@@ -28,6 +34,7 @@ class Books < Application
     end
     @feed_paginator = {}
     @feed_paginator[:letter] = letter unless letter.nil?
+    @feed_paginator[:status] = status unless status.nil?
     @books = Book.paginate(options)
     display @books
   end

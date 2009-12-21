@@ -48,7 +48,7 @@
   <li><label>Właściciel:</label> <%= @book.owner_uid %></li>
   <% end %>
   <% if @book.shop_url %>
-  <li><label>Sklep:</label> <%= @book.shop_url %></li>
+  <li><label>Sklep:</label> <%= link_to @book.shop_url, @book.shop_url %></li>
   <% end %>
 </ul>
 
