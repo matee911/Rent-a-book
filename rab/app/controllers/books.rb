@@ -22,15 +22,15 @@ class Books < Application
     letter = params.delete(:letter)
 
     options = {:page => page, :per_page => 8, :order => 'title'}
-    unless status.nil?:
-        options[:status] = status.to_i
+    if status.nil?
+      options[:status] = {'$ne' => 1}
     else
-        options[:status] = {'$ne' => 1}
+      options[:status] = status.to_i
     end
 
     if !letter.nil? and ('A'..'Z').include? letter.upcase
       options[:title] = /^#{letter.upcase}/i
-    elsif !letter.nil? and letter == '0':
+    elsif !letter.nil? and letter == '0'
       options[:title] = /^[0-9]/
     end
     @feed_paginator = {}
