@@ -31,10 +31,12 @@
                 </h1>
               </div>
               <div id="mainNav">
-                <%= main_menu do
-                    add_menu_item "Książki", resource(:books), :identify_by => { :controller => "books" }
-                    add_menu_item "Propozycje", resource(:books, :status => 1), :identify_by => { :controller => "books" }
-                  end %>
+                <% if session.authenticated? %>
+                  <%= main_menu do
+                      add_menu_item "Książki", resource(:books), :identify_by => { :controller => "books" }
+                      add_menu_item "Propozycje", resource(:books, :status => 1), :identify_by => { :controller => "books" }
+                    end %>
+                <% end %>
                 <ul style="margin-left: 350px">
                   <li><%= link_to("<span>logout</span>", url(:logout)) if session.authenticated? %></li>
                 </ul>
