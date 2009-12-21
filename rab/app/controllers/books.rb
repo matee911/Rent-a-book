@@ -13,6 +13,7 @@ class Books < Application
     allow_all :to => [:rent]
     allow_all :to => [:show]
     allow_all :to => [:hint]
+    allow_all :to => [:history]
   end
 
   def index
@@ -109,6 +110,11 @@ class Books < Application
   def hint(isbn)
     raise NotFound unless Book.valid_isbn?(isbn)
     render Book.hint_book(isbn).to_json, :format => :json
+  end
+
+  def history
+    @items = RentHistory.all(:order => 'from_date desc')
+    display @items
   end
 
 end # Books

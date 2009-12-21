@@ -1,0 +1,17 @@
+
+<table>
+  <tr>
+    <td>Od</td>
+    <td>Do</td>
+    <td>Kto</td>
+    <td>Książka</td>
+  </tr>
+<% @items.each do |rent_history| %>
+  <tr>
+    <td><%= readable_date rent_history.from_date %></td>
+    <td><%= readable_date rent_history.to_date %></td>
+    <td><%= link_to rent_history.uid, url(:show_user, :uid => rent_history.uid) %></td>
+    <td><% if !rent_history.book.nil? %><%= link_to rent_history.book.title, resource(rent_history.book) %><% end %></td>
+  </tr>
+<% end %>
+</table>
