@@ -10,11 +10,11 @@ class Book
   IMAGES_PATH = "/assets/covers/"
   
   STATUS_TYPES = {
-    :na => [0, "Not available"],
-    :proposition => [1, "Proposition"],
-    :waiting => [2, "Waiting"],
-    :available => [3, "Available"],
-    :rented => [4, "Rented"]
+    :na => [0, "Nie dostępna"],
+    :proposition => [1, "Propozycja"],
+    :waiting => [2, "Czekamy na paczkę"],
+    :available => [3, "Dostępna :)"],
+    :rented => [4, "Wypożyczona"]
   }
   
   validate :validate_isbn

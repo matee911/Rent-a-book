@@ -28,12 +28,13 @@
         <%= link_to "#{book.title}", resource(book) %>
       </td>
       <td class="can-rent">
-        <% if book.can_rent? %>
-          Yes, U can!
-        <% end %>
-        <% if book.is_proposition? %>
-          Propozycja
-        <% end %>
+        <%= book.status_readable %>
+        <%# if book.can_rent? %>
+          <%#*Yes, U can!%>
+        <%# end %>
+        <%# if book.is_proposition? %>
+          <%#*Propozycja%>
+        <%# end %>
       </td>
     </tr>
     <% end %>
