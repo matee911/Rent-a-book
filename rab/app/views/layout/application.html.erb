@@ -17,7 +17,10 @@
         <div class="innerCenter">
           <div id="topNav">
             <ul>
-              <li><%= current_user.full_name if session.authenticated? %></li>
+              <li><% if session.authenticated? %>
+                  <%= link_to current_user.full_name, url(:show_user, :uid => current_user.uid) %>
+                <% end %>
+              </li>
             </ul>
           </div>
           <div id="branding">
