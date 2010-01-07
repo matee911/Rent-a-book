@@ -41,7 +41,7 @@ Merb::Router.prepare do
   authenticate do
     match("/").to(:controller => 'books')
   end
-  match("/check").to(:controller => 'books', :action => 'check')
+  match("/check").to(:controller => 'index', :action => 'check')
   match("/history").to(:controller => "books", :action => "history").name(:history)
   match("/users/:uid", :uid => UID_RX).to(:controller => "users", :action => "show").name(:show_user)
   match("/books/:slug/rent", :slug => SLUG_RX).to(:controller => "books", :action => "rent").name(:rent_book)

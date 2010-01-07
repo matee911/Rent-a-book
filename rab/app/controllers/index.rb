@@ -5,4 +5,9 @@ class Index < Application
     render
   end
   
+  def check
+    @book = Book.first
+    render @book.title, :format => :text
+  end
+  
 end
