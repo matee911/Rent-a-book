@@ -116,6 +116,11 @@ class Books < Application
     @items = RentHistory.all(:order => 'from_date desc')
     display @items
   end
+  
+  def check
+    @book = Book.first
+    render @book.title, :format => :text
+  end
 
 end # Books
 
