@@ -6,7 +6,7 @@
     <%= link_to 'Biorę!', url(:rent_book, :slug => @book.slug) %>
   <% else %>
     <% if @book.rented_by?(session.user) %>
-      <%= link_to('Oddaję!', url(:give_back_book, :slug => @book.slug)) if current_user.has_permission?(:can_give_back, @book) %>
+      <%= link_to('Oddaję!', url(:give_back_book, :slug => @book.slug)) %>
     <% end %>
   <% end %><br/>
 <% end %>
