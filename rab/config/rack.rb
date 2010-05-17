@@ -1,3 +1,9 @@
+# use Rack::Head to handle HEAD requests properly
+use Rack::Head
+
+# Correctly set a content length.
+use Merb::Rack::ContentLength
+
 # use PathPrefix Middleware if :path_prefix is set in Merb::Config
 if prefix = ::Merb::Config[:path_prefix]
   use Merb::Rack::PathPrefix, prefix

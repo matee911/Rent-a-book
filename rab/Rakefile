@@ -1,4 +1,13 @@
-require 'rubygems'
+begin
+  # Just in case the bundle was locked
+  # This shouldn't happen in a dev environment but lets be safe
+  require '.bundle/environment'
+rescue LoadError
+  require 'rubygems'
+  require 'bundler'
+  Bundler.setup
+end
+
 require 'rake/rdoctask'
 
 require 'merb-core'
@@ -6,13 +15,13 @@ require 'merb-core/tasks/merb'
 
 include FileUtils
 
-# Load the basic runtime dependencies; this will include 
+# Load the basic runtime dependencies; this will include
 # any plugins and therefore plugin rake tasks.
 init_env = ENV['MERB_ENV'] || 'rake'
 Merb.load_dependencies(:environment => init_env)
-     
+
 # Get Merb plugins and dependencies
-Merb::Plugins.rakefiles.each { |r| require r } 
+Merb::Plugins.rakefiles.each { |r| require r }
 
 # Load any app level custom rakefile extensions from lib/tasks
 tasks_path = File.join(File.dirname(__FILE__), "lib", "tasks")

@@ -1,11 +1,11 @@
 # Go to http://wiki.merbivore.com/pages/init-rb
- 
-require 'config/dependencies.rb'
- 
-use_orm :mongomapper
+
+#require 'config/dependencies.rb'
+
+#use_orm :mongomapper
 use_test :rspec
 use_template_engine :erb
- 
+
 Merb::Config.use do |c|
   c[:use_mutex] = false
   c[:session_store] = 'cookie'  # can also be 'memory', 'memcache', 'container', 'datamapper
